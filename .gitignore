@@ -52,6 +52,7 @@ data/*
 .profile
 *.csv
 *.json
+*.mrc
 *.txt
 local/*
 *.xml
@@ -59,3 +60,4 @@ local/*
 figuringout.py
 
 !geoblacklight-schema.json
+!gacs_code.csv
