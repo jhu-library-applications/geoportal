@@ -1,6 +1,7 @@
 from pymarc import MARCReader
 import csv
 import argparse
+import re
 from sheetFeeder import dataSheet
 
 parser = argparse.ArgumentParser()
@@ -14,24 +15,29 @@ else:
 
 gacs_dict = {}
 types_dict = {}
+datetypes_dict = {}
+lang_dict = {}
+
+
+def createDict(csvname, column1, column2, dictname):
+    with open(csvname) as codes:
+        codes = csv.DictReader(codes)
+        for row in codes:
+            code = row[column1]
+            name = row[column2]
+            dictname[code] = name
+
+
 #  Import gacs codes used in 043 fields.
-with open('gacs_code.csv') as gacs:
-    gacs = csv.DictReader(gacs)
-    for row in gacs:
-        code = row['code']
-        location = row['location']
-        gacs_dict[code] = location
-# Import type codes used in leader 06.
-with open('types.csv') as type_codes:
-    type_codes = csv.DictReader(type_codes)
-    for row in type_codes:
-        code = row['Type']
-        name = row['Name']
-        types_dict[code] = name
-
-# Creates key/value pair in dict where key = field_name, value = values of MARC tags in record.
+createDict('gacs_code.csv', 'code', 'location', gacs_dict)
+#  Import type codes used in leader 006.
+createDict('types.csv', 'Type', 'Name', types_dict)
+#  Import date type codes used in leader 008.
+createDict('datetypes.csv', 'Type', 'Name', datetypes_dict)
+createDict('langcodes.csv', 'Code', 'Name', lang_dict)
 
 
+#  Creates k,v pair in dict where key = field_name, value = values of MARC tags in record.
 def field_finder(record, field_name, tags):
     field = record.get_fields(*tags)
     field_list = []
@@ -40,9 +46,8 @@ def field_finder(record, field_name, tags):
         field_list.append(my_field)
     mrc_fields[field_name] = field_list
 
-# Creates key/value pair in dict where key = field_name, value = values of specific subfield in MARC tag in record.
 
-
+# Creates k,v pair in dict where key = field_name, value = values of specific subfield in MARC tag in record.
 def subfield_finder(record, field_name, subfields, tags):
     field = record.get_fields(*tags)
     field_list = []
@@ -53,59 +58,88 @@ def subfield_finder(record, field_name, subfields, tags):
     mrc_fields[field_name] = field_list
 
 
+# Converts code from MARC record into name from imported dictionaries.
+def convert_to_name(keyname, dictname):
+    for k, v in mrc_fields.items():
+        if k == keyname:
+            for count, item in enumerate(v):
+                print(v)
+                for key, value in dictname.items():
+                    if item == key:
+                        v[count] = value
+
+
 all_fields = []
 
 with open(filename, 'rb') as fh:
     marc_recs = MARCReader(fh, to_unicode=True, force_utf8=True)
     for record in marc_recs:
+        print(record)
         mrc_fields = {}
         leader = record.leader
+        #  Finds fields/subfield values in record.
         subfield_finder(record, 'bib', subfields=['a'], tags=['910'])
+        subfield_finder(record, 'oclc', subfields=['a'], tags=['035'])
         subfield_finder(record, 'links', subfields=['u'], tags=['856'])
         field_finder(record, 'authors', tags=['100', '110', '111', '130'])
         field_finder(record, 'contributors',  tags=['700', '710', '711', '730'])
         field_finder(record, 'subjects', tags=['600', '610', '650', '651'])
         field_finder(record, 'descs', tags=['500', '520'])
-        field_finder(record, 'lang', tags=['008'])
-        subfield_finder(record, 'dates', subfields=['c'], tags=['264', '260'])
+        field_finder(record, '008', tags=['008'])
         subfield_finder(record, 'titles', subfields=['a', 'b'], tags=['245', '246'])
+        subfield_finder(record, 'scales', subfields=['a', 'b', 'c'], tags=['034'])
+        subfield_finder(record, 'coord', subfields=['d', 'e', 'f', 'g'], tags=['034'])
+        subfield_finder(record, 'cdates', subfields=['x', 'y'], tags=['034'])
         subfield_finder(record, 'geos', subfields=['c'], tags=['255'])
         subfield_finder(record, 'locs', subfields=['a'], tags=['043'])
-        mrc_fields['type'] = leader[6]
+        mrc_fields['type'] = [leader[6]]
         keys = []
-
-        #  Converts 043 codes to place names.
+        # Edit & convert values in dictionary.
         for k, v in mrc_fields.items():
-            if k == 'locs':
-                for count, loc in enumerate(v):
-                    for key, value in gacs_dict.items():
-                        if loc == key:
-                            v[count] = value
-            elif k == 'lang':  # Find Lang code.
+            if k == '008':  # Find Lang codes, DtSt and Dates from field 008.
                 v = str(v[0])
-                v = v[35:38]
-                v = [v]
+                datetype = [v[6]]
+                date1 = v[7:11].strip()
+                date2 = v[11:15].strip()
+                lang = [v[35:38]]
+            elif k == 'oclc':  # Finds only oclc number, deleting prefixes.
+                oclc_list = []
+                for item in v:
+                    item = str(item)
+                    oclc_num = re.search(r'([0-9]+)', item)
+                    if oclc_num:
+                        oclc_num = oclc_num.group(1)
+                        if oclc_num not in oclc_list:
+                            if oclc_num != mrc_fields['bib'][0]:
+                                oclc_list.append(oclc_num)
+                v = oclc_list
                 mrc_fields[k] = v
-            elif k == 'type':  # Convert type code to name.
-                for key, value in types_dict.items():
-                    if v == key:
-                        v = [value]
-                        mrc_fields['type'] = v
 
-        # Converts values in k,v pair to strings joined by pipes.
+        del mrc_fields['008']
+        mrc_fields['datetype'] = datetype
+        mrc_fields['date1'] = date1
+        mrc_fields['date2'] = date2
+        mrc_fields['lang'] = lang
+        convert_to_name('datetype', datetypes_dict)
+        convert_to_name('locs', gacs_dict)
+        convert_to_name('type', types_dict)
+        convert_to_name('lang', lang_dict)
+
+        # Converts list values in k,v pair to strings joined by pipes.
         for k, v in mrc_fields.items():
             keys.append(k)
-            if len(v) > 2:
-                v = "|".join(v)
-                mrc_fields[k] = v
-            elif len(v) == 1:
-                v = str(v[0])
-                mrc_fields[k] = v
-            elif len(v) == 0:
-                v = ''
-                mrc_fields[k] = v
-            else:
-                pass
+            if isinstance(v, list):
+                if len(v) > 2:
+                    v = "|".join(v)
+                    mrc_fields[k] = v
+                elif len(v) == 1:
+                    v = str(v[0])
+                    mrc_fields[k] = v
+                elif len(v) == 0:
+                    v = ''
+                    mrc_fields[k] = v
+                else:
+                    pass
         # Adds dict created by this MARC record to all_fields list.
         all_fields.append(mrc_fields)
 
