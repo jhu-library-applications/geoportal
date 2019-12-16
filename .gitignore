@@ -62,3 +62,6 @@ figuringout.py
 !geoblacklight-schema.json
 !gacs_code.csv
 !types.csv
+!date_types.csv
+!marc_lang.csv
+!iso_lang.csv

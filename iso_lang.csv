@@ -1,0 +1,488 @@
+language,code
+Afar,aa
+Abkhazian,ab
+Achinese,ace
+Acoli,ach
+Adangme,ada
+Adyghe; Adygei,ady
+Avestan,ae
+Afrikaans,af
+Afro-Asiatic languages,afa
+Afrihili,afh
+Ainu,ain
+Akan,ak
+Akkadian,akk
+Albanian,sq
+Aleut,ale
+Algonquian languages,alg
+Southern Altai,alt
+Amharic,am
+Aragonese,an
+"English, Old (ca.450-1100)",ang
+Angika,anp
+Apache languages,apa
+Arabic,ar
+Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE),arc
+Armenian,hy
+Mapudungun; Mapuche,arn
+Arapaho,arp
+Artificial languages,art
+Arawak,arw
+Assamese,as
+Asturian; Bable; Leonese; Asturleonese,ast
+Athapascan languages,ath
+Australian languages,aus
+Avaric,av
+Awadhi,awa
+Aymara,ay
+Azerbaijani,az
+Bashkir,ba
+Banda languages,bad
+Bamileke languages,bai
+Baluchi,bal
+Bambara,bm
+Balinese,ban
+Basque,eu
+Basa,bas
+Baltic languages,bat
+Belarusian,be
+Beja; Bedawiyet,bej
+Bemba,bem
+Bengali,bn
+Berber languages,ber
+Bulgarian,bg
+Bihari languages,bh
+Bhojpuri,bho
+Bislama,bi
+Bikol,bik
+Bini; Edo,bin
+Siksika,bla
+Bantu languages,bnt
+Tibetan,bo
+Bosnian,bs
+Breton,br
+Braj,bra
+Batak languages,btk
+Buriat,bua
+Buginese,bug
+Burmese,my
+Blin; Bilin,byn
+Catalan; Valencian,ca
+Caddo,cad
+Central American Indian languages,cai
+Galibi Carib,car
+Caucasian languages,cau
+Chechen,ce
+Cebuano,ceb
+Celtic languages,cel
+Chamorro,ch
+Chibcha,chb
+Chagatai,chg
+Chinese,zh
+Chuukese,chk
+Mari,chm
+Chinook jargon,chn
+Choctaw,cho
+Chipewyan; Dene Suline,chp
+Cherokee,chr
+Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic,cu
+Chuvash,cv
+Cheyenne,chy
+Chamic languages,cmc
+Montenegrin,cnr
+Corsican,co
+Coptic,cop
+Cornish,kw
+"Creoles and pidgins, English based",cpe
+"Creoles and pidgins, French-based",cpf
+"Creoles and pidgins, Portuguese-based",cpp
+Cree,cr
+Crimean Tatar; Crimean Turkish,crh
+Creoles and pidgins,crp
+Czech,cs
+Kashubian,csb
+Cushitic languages,cus
+Welsh,cy
+Danish,da
+Dakota,dak
+Dargwa,dar
+Land Dayak languages,day
+German,de
+Delaware,del
+Slave (Athapascan),den
+Dogrib,dgr
+Dinka,din
+Divehi; Dhivehi; Maldivian,dv
+Dogri,doi
+Dravidian languages,dra
+Lower Sorbian,dsb
+Duala,dua
+"Dutch, Middle (ca.1050-1350)",dum
+Dutch; Flemish,nl
+Dyula,dyu
+Dzongkha,dz
+Ewe,ee
+Efik,efi
+Egyptian (Ancient),egy
+Ekajuk,eka
+"Greek, Modern (1453-)",el
+Elamite,elx
+English,en
+"English, Middle (1100-1500)",enm
+Esperanto,eo
+Spanish; Castilian,es
+Estonian,et
+Ewondo,ewo
+Persian,fa
+Fang,fan
+Faroese,fo
+Fanti,fat
+Fulah,ff
+Finnish,fi
+Fijian,fj
+Filipino; Pilipino,fil
+Finno-Ugrian languages,fiu
+Fon,fon
+French,fr
+"French, Middle (ca.1400-1600)",frm
+"French, Old (842-ca.1400)",fro
+Northern Frisian,frr
+Eastern Frisian,frs
+Western Frisian,fy
+Friulian,fur
+Irish,ga
+Ga,gaa
+Gayo,gay
+Gbaya,gba
+Gaelic; Scottish Gaelic,gd
+Germanic languages,gem
+Georgian,ka
+Geez,gez
+Gilbertese,gil
+Galician,gl
+Manx,gv
+"German, Middle High (ca.1050-1500)",gmh
+Guarani,gn
+"German, Old High (ca.750-1050)",goh
+Gondi,gon
+Gorontalo,gor
+Gothic,got
+Grebo,grb
+"Greek, Ancient (to 1453)",grc
+Swiss German; Alemannic; Alsatian,gsw
+Gujarati,gu
+Gwich'in,gwi
+Hausa,ha
+Haida,hai
+Haitian; Haitian Creole,ht
+Hawaiian,haw
+Hebrew,he
+Herero,hz
+Hindi,hi
+Hiligaynon,hil
+Himachali languages; Western Pahari languages,him
+Hittite,hit
+Hmong; Mong,hmn
+Hiri Motu,ho
+Croatian,hr
+Upper Sorbian,hsb
+Hungarian,hu
+Hupa,hup
+Interlingua (International Auxiliary Language Association),ia
+Iban,iba
+Igbo,ig
+Icelandic,is
+Indonesian,id
+Ido,io
+Interlingue; Occidental,ie
+Sichuan Yi; Nuosu,ii
+Ijo languages,ijo
+Inupiaq,ik
+Inuktitut,iu
+Iloko,ilo
+Indic languages,inc
+Indo-European languages,ine
+Ingush,inh
+Iranian languages,ira
+Iroquoian languages,iro
+Italian,it
+Japanese,ja
+Javanese,jv
+Lojban,jbo
+Judeo-Persian,jpr
+Judeo-Arabic,jrb
+Kara-Kalpak,kaa
+Kabyle,kab
+Kachin; Jingpho,kac
+Kalaallisut; Greenlandic,kl
+Kamba,kam
+Kannada,kn
+Karen languages,kar
+Kashmiri,ks
+Kanuri,kr
+Kawi,kaw
+Kazakh,kk
+Kabardian,kbd
+Kongo,kg
+Khasi,kha
+Khoisan languages,khi
+Central Khmer,km
+Khotanese; Sakan,kho
+Kikuyu; Gikuyu,ki
+Kinyarwanda,rw
+Kirghiz; Kyrgyz,ky
+Kuanyama; Kwanyama,kj
+Kimbundu,kmb
+Korean,ko
+Konkani,kok
+Komi,kv
+Kosraean,kos
+Kpelle,kpe
+Karachay-Balkar,krc
+Karelian,krl
+Kru languages,kro
+Kurukh,kru
+Kurdish,ku
+Kumyk,kum
+Kutenai,kut
+Latin,la
+Ladino,lad
+Lahnda,lah
+Lamba,lam
+Lao,lo
+Latvian,lv
+Luxembourgish; Letzeburgesch,lb
+Lezghian,lez
+Ganda,lg
+Limburgan; Limburger; Limburgish,li
+Lingala,ln
+Lithuanian,lt
+Mongo,lol
+Lozi,loz
+Luba-Katanga,lu
+Luba-Lulua,lua
+Luiseno,lui
+Lunda,lun
+Luo (Kenya and Tanzania),luo
+Lushai,lus
+Macedonian,mk
+Madurese,mad
+Magahi,mag
+Marshallese,mh
+Maithili,mai
+Makasar,mak
+Malayalam,ml
+Mandingo,man
+Maori,mi
+Austronesian languages,map
+Marathi,mr
+Masai,mas
+Malay,ms
+Moksha,mdf
+Mandar,mdr
+Mende,men
+Malagasy,mg
+"Irish, Middle (900-1200)",mga
+Mi'kmaq; Micmac,mic
+Minangkabau,min
+Uncoded languages,mis
+Mon-Khmer languages,mkh
+Maltese,mt
+Mongolian,mn
+Manchu,mnc
+Manipuri,mni
+Manobo languages,mno
+Mohawk,moh
+Mossi,mos
+Multiple languages,mul
+Munda languages,mun
+Creek,mus
+Mirandese,mwl
+Marwari,mwr
+Mayan languages,myn
+Erzya,myv
+Nauru,na
+Nahuatl languages,nah
+North American Indian languages,nai
+Neapolitan,nap
+Navajo; Navaho,nv
+"Bokmål, Norwegian; Norwegian Bokmål",nb
+"Ndebele, South; South Ndebele",nr
+"Ndebele, North; North Ndebele",nd
+Ndonga,ng
+"Low German; Low Saxon; German, Low; Saxon, Low",nds
+Nepali,ne
+Nepal Bhasa; Newari,new
+Nias,nia
+Niger-Kordofanian languages,nic
+Niuean,niu
+"Norwegian Nynorsk; Nynorsk, Norwegian",nn
+Norwegian,no
+Nogai,nog
+"Norse, Old",non
+N'Ko,nqo
+Pedi; Sepedi; Northern Sotho,nso
+Nubian languages,nub
+Classical Newari; Old Newari; Classical Nepal Bhasa,nwc
+Chichewa; Chewa; Nyanja,ny
+Nyamwezi,nym
+Nyankole,nyn
+Nyoro,nyo
+Nzima,nzi
+Occitan (post 1500),oc
+Ojibwa,oj
+Oromo,om
+Oriya,or
+Ossetian; Ossetic,os
+Osage,osa
+"Turkish, Ottoman (1500-1928)",ota
+Otomian languages,oto
+Panjabi; Punjabi,pa
+Papuan languages,paa
+Pangasinan,pag
+Pahlavi,pal
+Pampanga; Kapampangan,pam
+Papiamento,pap
+Palauan,pau
+"Persian, Old (ca.600-400 B.C.)",peo
+Philippine languages,phi
+Phoenician,phn
+Pali,pi
+Polish,pl
+Pohnpeian,pon
+Portuguese,pt
+Prakrit languages,pra
+"Provençal, Old (to 1500);Occitan, Old (to 1500)",pro
+Pushto; Pashto,ps
+Reserved for local use,qaa-qtz
+Quechua,qu
+Rajasthani,raj
+Rapanui,rap
+Rarotongan; Cook Islands Maori,rar
+Romansh,rm
+Rundi,rn
+Romanian; Moldavian; Moldovan,ro
+Romance languages,roa
+Romany,rom
+Russian,ru
+Aromanian; Arumanian; Macedo-Romanian,rup
+Sanskrit,sa
+Sandawe,sad
+Sango,sg
+Yakut,sah
+South American Indian languages,sai
+Salishan languages,sal
+Samaritan Aramaic,sam
+Sasak,sas
+Santali,sat
+Sardinian,sc
+Sicilian,scn
+Scots,sco
+Sindhi,sd
+Northern Sami,se
+Selkup,sel
+Semitic languages,sem
+"Irish, Old (to 900)",sga
+Sign Languages,sgn
+Shan,shn
+Sinhala; Sinhalese,si
+Sidamo,sid
+Siouan languages,sio
+Sino-Tibetan languages,sit
+Slovak,sk
+Slovenian,sl
+Slavic languages,sla
+Samoan,sm
+Southern Sami,sma
+Sami languages,smi
+Lule Sami,smj
+Inari Sami,smn
+Skolt Sami,sms
+Shona,sn
+Soninke,snk
+Somali,so
+Sogdian,sog
+Songhai languages,son
+"Sotho, Southern",st
+Serbian,sr
+Sranan Tongo,srn
+Serer,srr
+Swati,ss
+Nilo-Saharan languages,ssa
+Sundanese,su
+Sukuma,suk
+Susu,sus
+Sumerian,sux
+Swedish,sv
+Swahili,sw
+Classical Syriac,syc
+Syriac,syr
+Tamil,ta
+Tahitian,ty
+Tai languages,tai
+Tatar,tt
+Telugu,te
+Timne,tem
+Tereno,ter
+Tetum,tet
+Tajik,tg
+Tagalog,tl
+Thai,th
+Tigrinya,ti
+Tigre,tig
+Tiv,tiv
+Turkmen,tk
+Tokelau,tkl
+Klingon; tlhIngan-Hol,tlh
+Tlingit,tli
+Tamashek,tmh
+Tswana,tn
+Tonga (Tonga Islands),to
+Tonga (Nyasa),tog
+Tok Pisin,tpi
+Turkish,tr
+Tsonga,ts
+Tsimshian,tsi
+Tumbuka,tum
+Tupi languages,tup
+Altaic languages,tut
+Tuvalu,tvl
+Twi,tw
+Tuvinian,tyv
+Udmurt,udm
+Uighur; Uyghur,ug
+Ugaritic,uga
+Ukrainian,uk
+Umbundu,umb
+Undetermined,und
+Urdu,ur
+Uzbek,uz
+Vai,vai
+Venda,ve
+Vietnamese,vi
+Volapük,vo
+Votic,vot
+Walloon,wa
+Wakashan languages,wak
+Wolaitta; Wolaytta,wal
+Waray,war
+Washo,was
+Sorbian languages,wen
+Wolof,wo
+Kalmyk; Oirat,xal
+Xhosa,xh
+Yao,yao
+Yapese,yap
+Yiddish,yi
+Yoruba,yo
+Yupik languages,ypk
+Zhuang; Chuang,za
+Zapotec,zap
+Blissymbols; Blissymbolics; Bliss,zbl
+Zenaga,zen
+Standard Moroccan Tamazight,zgh
+Zande languages,znd
+Zulu,zu
+Zuni,zun
+No linguistic content; Not applicable,zxx
+Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki,zza

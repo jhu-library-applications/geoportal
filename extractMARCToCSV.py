@@ -33,8 +33,8 @@ createDict('gacs_code.csv', 'code', 'location', gacs_dict)
 #  Import type codes used in leader 006.
 createDict('types.csv', 'Type', 'Name', types_dict)
 #  Import date type codes used in leader 008.
-createDict('datetypes.csv', 'Type', 'Name', datetypes_dict)
-createDict('langcodes.csv', 'Code', 'Name', lang_dict)
+createDict('date_types.csv', 'Type', 'Name', datetypes_dict)
+createDict('marc_lang.csv', 'Code', 'Name', lang_dict)
 
 
 #  Creates k,v pair in dict where key = field_name, value = values of MARC tags in record.
@@ -83,10 +83,12 @@ with open(filename, 'rb') as fh:
         subfield_finder(record, 'links', subfields=['u'], tags=['856'])
         field_finder(record, 'authors', tags=['100', '110', '111', '130'])
         field_finder(record, 'contributors',  tags=['700', '710', '711', '730'])
+        subfield_finder(record, 'publisher', subfields=['b'], tags=['260', '264'])
         field_finder(record, 'subjects', tags=['600', '610', '650', '651'])
         field_finder(record, 'descs', tags=['500', '520'])
         field_finder(record, '008', tags=['008'])
-        subfield_finder(record, 'titles', subfields=['a', 'b'], tags=['245', '246'])
+        subfield_finder(record, 'title', subfields=['a', 'b'], tags=['245', '246'])
+        subfield_finder(record, 'alt_title', subfields=['a', 'b'], tags=['246'])
         subfield_finder(record, 'scales', subfields=['a', 'b', 'c'], tags=['034'])
         subfield_finder(record, 'coord', subfields=['d', 'e', 'f', 'g'], tags=['034'])
         subfield_finder(record, 'cdates', subfields=['x', 'y'], tags=['034'])
