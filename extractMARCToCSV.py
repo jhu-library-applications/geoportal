@@ -2,7 +2,6 @@ from pymarc import MARCReader
 import csv
 import argparse
 import re
-from sheetFeeder import dataSheet
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -82,12 +81,13 @@ with open(filename, 'rb') as fh:
         subfield_finder(record, 'oclc', subfields=['a'], tags=['035'])
         subfield_finder(record, 'links', subfields=['u'], tags=['856'])
         field_finder(record, 'authors', tags=['100', '110', '111', '130'])
+        subfield_finder(record, 'statresp', subfields=['c'], tags=['245'])
         field_finder(record, 'contributors',  tags=['700', '710', '711', '730'])
         subfield_finder(record, 'publisher', subfields=['b'], tags=['260', '264'])
         field_finder(record, 'subjects', tags=['600', '610', '650', '651'])
         field_finder(record, 'descs', tags=['500', '520'])
         field_finder(record, '008', tags=['008'])
-        subfield_finder(record, 'title', subfields=['a', 'b'], tags=['245', '246'])
+        mrc_fields['title'] = record.title()
         subfield_finder(record, 'alt_title', subfields=['a', 'b'], tags=['246'])
         subfield_finder(record, 'scales', subfields=['a', 'b', 'c'], tags=['034'])
         subfield_finder(record, 'coord', subfields=['d', 'e', 'f', 'g'], tags=['034'])
@@ -131,7 +131,7 @@ with open(filename, 'rb') as fh:
         for k, v in mrc_fields.items():
             keys.append(k)
             if isinstance(v, list):
-                if len(v) > 2:
+                if len(v) >= 2:
                     v = "|".join(v)
                     mrc_fields[k] = v
                 elif len(v) == 1:
@@ -145,11 +145,8 @@ with open(filename, 'rb') as fh:
         # Adds dict created by this MARC record to all_fields list.
         all_fields.append(mrc_fields)
 
-print(all_fields)
+
 with open('marc.csv', 'w') as output_file:
     dict_writer = csv.DictWriter(output_file, keys)
     dict_writer.writeheader()
     dict_writer.writerows(all_fields)
-
-# my_sheet = dataSheet('13x9Rke5v_zznRSaxFxqu_yoOWsvd4p0GmIN2-uI3NhI', 'Sheet1!A:Z')
-# my_sheet.importCSV('marc.csv', quote='ALL')

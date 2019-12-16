@@ -48,7 +48,7 @@ def combine_keys(keyList):
 
 
 f = csv.writer(open('name.csv', 'w'))
-f.writerow(['itemID']+['uri']+['bib']+['oclc']+['lang']+['authors']+['contributors']+['descriptions']+['title']+['alt_title']+['subjects']+['date1']+['collection']+['id_issn']+['publisher']+['type'])
+f.writerow(['itemID']+['uri']+['bib']+['oclc']+['lang']+['authors']+['contributors']+['descs']+['title']+['alt_title']+['subjects']+['date1']+['collection']+['publisher']+['type'])
 
 with open(filename) as geoMetadata:
     geoMetadata = csv.DictReader(geoMetadata)
@@ -72,7 +72,6 @@ with open(filename) as geoMetadata:
         subjects = combine_keys(keyList=[subject, ddc])
         date1 = key_finder('dc.date.issued')
         id_other = key_finder('dc.identifier.other')
-        id_issn = key_finder('dc.identifier.issn')
         lang = key_finder('dc.language.iso')
         publisher = key_finder('dc.publisher')
         type = key_finder('dc.type')
@@ -93,4 +92,4 @@ with open(filename) as geoMetadata:
         lang = '|'.join(lang)
         print(lang)
 
-        f.writerow([itemID]+[uri]+[bib]+[oclc]+[lang]+[authors]+[contributors]+[descs]+[title]+[alt_title]+[subjects]+[date1]+[collection]+[id_issn]+[publisher]+[type])
+        f.writerow([itemID]+[uri]+[bib]+[oclc]+[lang]+[authors]+[contributors]+[descs]+[title]+[alt_title]+[subjects]+[date1]+[collection]+[publisher]+[type])
