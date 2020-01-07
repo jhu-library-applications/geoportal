@@ -30,9 +30,9 @@ def createDict(csvname, column1, column2, dictname):
 #  Import gacs codes used in 043 fields.
 createDict('gacs_code.csv', 'code', 'location', gacs_dict)
 #  Import type codes used in leader 006.
-createDict('types.csv', 'Type', 'Name', types_dict)
+createDict('marc_006types.csv', 'Type', 'Name', types_dict)
 #  Import date type codes used in leader 008.
-createDict('date_types.csv', 'Type', 'Name', datetypes_dict)
+createDict('marc_datetypes.csv', 'Type', 'Name', datetypes_dict)
 createDict('marc_lang.csv', 'Code', 'Name', lang_dict)
 
 
