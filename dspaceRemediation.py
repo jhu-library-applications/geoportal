@@ -11,6 +11,7 @@ if args.file:
 else:
     filename = input('Enter filename (including \'.csv\'): ')
 
+fileDir = os.path.dirname(__file__)
 
 lang_dict = {}
 
@@ -25,7 +26,7 @@ def createDict(csvname, columnName1, columnName2, dictname):
 
 
 #  Import gacs codes used in 043 fields.
-createDict('iso_lang.csv', 'code', 'language', lang_dict)
+createDict(os.path.join(fileDir, 'dictionaries/iso_lang.csv'), 'code', 'language', lang_dict)
 
 
 def key_finder(columnName):

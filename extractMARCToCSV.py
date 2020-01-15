@@ -2,6 +2,7 @@ from pymarc import MARCReader
 import csv
 import argparse
 import re
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -11,6 +12,9 @@ if args.file:
     filename = args.file
 else:
     filename = input('Enter filename (including \'.mrc\'): ')
+
+fileDir = os.path.dirname(__file__)
+
 
 gacs_dict = {}
 types_dict = {}
@@ -28,12 +32,12 @@ def createDict(csvname, column1, column2, dictname):
 
 
 #  Import gacs codes used in 043 fields.
-createDict('gacs_code.csv', 'code', 'location', gacs_dict)
+createDict(os.path.join(fileDir, 'dictionaries/gacs_code.csv'), 'code', 'location', gacs_dict)
 #  Import type codes used in leader 006.
-createDict('marc_006types.csv', 'Type', 'Name', types_dict)
+createDict(os.path.join(fileDir,'dictionaries/marc_006types.csv'), 'Type', 'Name', types_dict)
 #  Import date type codes used in leader 008.
-createDict('marc_datetypes.csv', 'Type', 'Name', datetypes_dict)
-createDict('marc_lang.csv', 'Code', 'Name', lang_dict)
+createDict(os.path.join(fileDir,'dictionaries/marc_datetypes.csv'), 'Type', 'Name', datetypes_dict)
+createDict(os.path.join(fileDir,'dictionaries/marc_lang.csv'), 'Code', 'Name', lang_dict)
 
 
 #  Creates k,v pair in dict where key = field_name, value = values of MARC tags in record.
@@ -62,18 +66,17 @@ def convert_to_name(keyname, dictname):
     for k, v in mrc_fields.items():
         if k == keyname:
             for count, item in enumerate(v):
-                print(v)
                 for key, value in dictname.items():
                     if item == key:
                         v[count] = value
 
 
 all_fields = []
+record_count = 0
 
 with open(filename, 'rb') as fh:
-    marc_recs = MARCReader(fh, to_unicode=True, force_utf8=True)
+    marc_recs = MARCReader(fh, to_unicode=True)
     for record in marc_recs:
-        print(record)
         mrc_fields = {}
         leader = record.leader
         #  Finds fields/subfield values in record.
@@ -144,9 +147,10 @@ with open(filename, 'rb') as fh:
                     pass
         # Adds dict created by this MARC record to all_fields list.
         all_fields.append(mrc_fields)
+        record_count = record_count + 1
+        print(record_count)
 
-
-with open('marc.csv', 'w') as output_file:
+with open('marc4.csv', 'w') as output_file:
     dict_writer = csv.DictWriter(output_file, keys)
     dict_writer.writeheader()
     dict_writer.writerows(all_fields)
