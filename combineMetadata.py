@@ -2,6 +2,7 @@ import pandas as pd
 import argparse
 from sheetFeeder import dataSheet
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
 parser.add_argument('-m', '--marc')
@@ -37,7 +38,7 @@ frame.to_csv(path_or_buf='mergedCSV.csv', index=False)
 update = input("Do you want to update your google sheet? ")
 
 if update == 'yes':
-    my_sheet = dataSheet('11WHxSplDJfvhjLpSXRPPuIVL91MBFHqY3EVFiwFZigY', 'compliedSheet!A:Z')
+    my_sheet = dataSheet()
     my_sheet.importCSV('mergedCSV.csv', quote='ALL')
     print("Google sheet updated!")
 else:

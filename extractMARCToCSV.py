@@ -3,6 +3,7 @@ import csv
 import argparse
 import re
 import os
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -34,10 +35,10 @@ def createDict(csvname, column1, column2, dictname):
 #  Import gacs codes used in 043 fields.
 createDict(os.path.join(fileDir, 'dictionaries/gacs_code.csv'), 'code', 'location', gacs_dict)
 #  Import type codes used in leader 006.
-createDict(os.path.join(fileDir,'dictionaries/marc_006types.csv'), 'Type', 'Name', types_dict)
+createDict(os.path.join(fileDir, 'dictionaries/marc_006types.csv'), 'Type', 'Name', types_dict)
 #  Import date type codes used in leader 008.
-createDict(os.path.join(fileDir,'dictionaries/marc_datetypes.csv'), 'Type', 'Name', datetypes_dict)
-createDict(os.path.join(fileDir,'dictionaries/marc_lang.csv'), 'Code', 'Name', lang_dict)
+createDict(os.path.join(fileDir, 'dictionaries/marc_datetypes.csv'), 'Type', 'Name', datetypes_dict)
+createDict(os.path.join(fileDir, 'dictionaries/marc_lang.csv'), 'Code', 'Name', lang_dict)
 
 
 #  Creates k,v pair in dict where key = field_name, value = values of MARC tags in record.
@@ -150,7 +151,7 @@ with open(filename, 'rb') as fh:
         record_count = record_count + 1
         print(record_count)
 
-with open('marc4.csv', 'w') as output_file:
+with open('marc'+datetime.now().strftime('%Y-%m-%d %H.%M.%S')+'.csv', 'w') as output_file:
     dict_writer = csv.DictWriter(output_file, keys)
     dict_writer.writeheader()
     dict_writer.writerows(all_fields)

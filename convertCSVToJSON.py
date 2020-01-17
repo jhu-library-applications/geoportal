@@ -2,6 +2,7 @@ import csv
 import json
 import argparse
 from jsonschema import validate
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -72,12 +73,12 @@ with open(filename) as geoMetadata:
         json_file['dct_provenance_s'] = 'Hopkins'
         json_file['geoblacklight_version'] = '1.0'
         print(json_file)
-
+        date_time = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
         filename = identifier.replace('http://hopkinsgeoportal/', '')
-        with open(filename+'.json', 'w') as fp:
+        with open(filename+date_time+'.json', 'w') as fp:
             json.dump(json_file, fp)
 
-        with open(filename+'.json', 'r') as results:
+        with open(filename+date_time+'.json', 'r') as results:
             results = json.load(results)
             with open('geoblacklight-schema.json', 'r') as schema:
                 schema = json.load(schema)

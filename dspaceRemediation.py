@@ -1,6 +1,8 @@
 import csv
 import argparse
 import re
+from datetime import datetime
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -48,7 +50,7 @@ def combine_keys(keyList):
     return string
 
 
-f = csv.writer(open('name.csv', 'w'))
+f = csv.writer(open('remediatedDspaceMetadata'+datetime.now().strftime('%Y-%m-%d %H.%M.%S')+'.csv', 'w'))
 f.writerow(['itemID']+['uri']+['bib']+['oclc']+['lang']+['authors']+['contributors']+['descs']+['title']+['alt_title']+['subjects']+['date1']+['collection']+['publisher']+['type'])
 
 with open(filename) as geoMetadata:
