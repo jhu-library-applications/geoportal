@@ -1,6 +1,4 @@
 # geoportal
- 
-======
 
 ## convertCSVToJSON.py
 
