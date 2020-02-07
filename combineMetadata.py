@@ -1,7 +1,7 @@
 import pandas as pd
 import argparse
 from sheetFeeder import dataSheet
-
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -33,7 +33,9 @@ frame = pd.merge(frame, df_marc, on='bib', suffixes=('', '_m'))
 print(frame.columns)
 print(frame.head)
 
-frame.to_csv(path_or_buf='mergedCSV.csv', index=False)
+dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
+
+frame.to_csv(path_or_buf='mergedCSV_'+dt+'.csv', index=False)
 
 update = input("Do you want to update your google sheet? ")
 

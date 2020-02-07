@@ -2,6 +2,7 @@ import csv
 import argparse
 import re
 from fuzzywuzzy import fuzz
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -18,7 +19,9 @@ if args.file2:
 else:
     filename2 = input('Enter filename (including \'.csv\'): ')
 
-f = csv.writer(open('uris.csv', 'w', encoding='utf-8'))
+dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
+
+f = csv.writer(open('matchDSpaceAndMARCRecords'+dt+'.csv', 'w', encoding='utf-8'))
 f.writerow(['link']+['itemID']+['j_bib']+['m_bib']+['j_title']+['j_date']+['m_title']+['m_date']+['match'])
 
 with open(filename) as itemMetadataFile:

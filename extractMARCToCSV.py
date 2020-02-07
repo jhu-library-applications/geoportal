@@ -151,7 +151,9 @@ with open(filename, 'rb') as fh:
         record_count = record_count + 1
         print(record_count)
 
-with open('marc'+datetime.now().strftime('%Y-%m-%d %H.%M.%S')+'.csv', 'w') as output_file:
+dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
+
+with open('marcRecords_'+dt+'.csv', 'w') as output_file:
     dict_writer = csv.DictWriter(output_file, keys)
     dict_writer.writeheader()
     dict_writer.writerows(all_fields)
