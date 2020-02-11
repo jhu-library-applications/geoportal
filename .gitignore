@@ -67,3 +67,6 @@ figuringout.py
 !iso_lang.csv
 !iso_19115topics.csv
 !lcgft_cartographic.csv
+!marc_levelAuthorities.csv
+!marc_typeAuthorities.csv
+!marc_catsourceAuthorities.csv
