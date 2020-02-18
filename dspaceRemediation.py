@@ -3,15 +3,21 @@ import argparse
 import re
 from datetime import datetime
 import os
+import uuid
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
+parser.add_argument('-hi', '--hierarchy')
 args = parser.parse_args()
 
 if args.file:
     filename = args.file
 else:
     filename = input('Enter filename (including \'.csv\'): ')
+if args.hierarchy:
+    hierarchy = args.hierarchy
+else:
+    hierarchy = input('Enter hierarchy, parent or child: ')
 
 fileDir = os.path.dirname(__file__)
 
@@ -50,20 +56,40 @@ def combine_keys(keyList):
     return string
 
 
+def create_references(uri, bitstream):
+    dict = {}
+    dict['http://schema.org/url'] = uri
+    if bitstream:
+        uri = uri.replace('jhir', 'jscholarship')
+        bitstream_url = uri+'/'+bitstream
+        dict['http://schema.org/downloadUrl'] = bitstream_url
+    return dict
+
+
+keyList = ['hierarchy', 'uri', 'identifier', 'rights', 'title', 'layer_slug', 'solr_geom', 'solr_year', 'creators', 'description', 'collection', 'format', 'language', 'publisher', 'source', 'subject', 'type', 'isPartOf', 'date_issued', 'references', 'spatial', 'temporal', 'geo_type', 'layer_id', 'layer_modified', 'suppressed', 'bib', 'oclc', 'bitstreams']
+
+
 dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
 f = csv.writer(open('remediatedDspaceMetadata_'+dt+'.csv', 'w'))
-f.writerow(['itemID']+['uri']+['bib']+['oclc']+['lang']+['authors']+['contributors']+['descs']+['title']+['alt_title']+['subjects']+['date1']+['collection']+['publisher']+['type'])
+f.writerows([keyList])
 
 with open(filename) as geoMetadata:
     geoMetadata = csv.DictReader(geoMetadata)
     for row in geoMetadata:
-        itemID = row['itemID']
+        hierarchy = hierarchy
+        geoDict = dict.fromkeys(keyList)
+        id = uuid.uuid4()
         uri = row['dc.identifier.uri']
+        geoDict['identifier'] = id
+        bitstream = key_finder('bitstream_1')
+        bitstream_2 = key_finder('bitstream_2')
+        bitstreams = [bitstream, bitstream_2]
+        references = create_references(uri, bitstream)
         advisor = key_finder('dc.contributor.advisor')
         authors = key_finder('dc.contributor.author')
         editor = key_finder('dc.contributor.editor')
         other = key_finder('dc.contributor.other')
-        contributors = combine_keys(keyList=[advisor, editor, other])
+        contributors = combine_keys(keyList=[authors, advisor, editor, other])
         desc = key_finder('dc.description')
         abstract = key_finder('dc.description.abstract')
         sponsor = key_finder('dc.description.sponsorship')
@@ -71,6 +97,7 @@ with open(filename) as geoMetadata:
         descs = combine_keys(keyList=[desc, abstract, sponsor, toc])
         title = key_finder('dc.title')
         alt_title = key_finder('dc.title.alternative')
+        title = combine_keys(keyList=[title, alt_title])
         subject = key_finder('dc.subject')
         ddc = key_finder('dc.subject.ddc')
         subjects = combine_keys(keyList=[subject, ddc])
@@ -80,12 +107,26 @@ with open(filename) as geoMetadata:
         publisher = key_finder('dc.publisher')
         type = key_finder('dc.type')
         bib = key_finder('dc.identifier.localbibnumber')
+
+        geoDict['identifier'] = id
+        geoDict['uri'] = uri
+        geoDict['bitstreams'] = bitstreams
+        geoDict['references'] = references
+        geoDict['creators'] = contributors
+        geoDict['description'] = descs
+        geoDict['subject'] = subjects
+        geoDict['date_issued'] = date1
+        geoDict['publisher'] = publisher
+        geoDict['type'] = type
+        geoDict['rights'] = 'Public'
+        geoDict['suppressed'] = 'false'
         for id in id_other.split('|'):
             oclc = re.search(r'[0-9]{7,10}', id)
             if oclc:
                 oclc = oclc.group(0)
             else:
                 collection = id
+                geoDict['collection'] = collection
         lang = lang.split('|')
         for count, code in enumerate(lang):
             lang[count] = code[:2]
@@ -94,6 +135,16 @@ with open(filename) as geoMetadata:
                 if code == k:
                     lang[count] = v
         lang = '|'.join(lang)
-        print(lang)
+        geoDict['language'] = lang
+        if hierarchy == 'parent':
+            geoDict['hierarchy'] = 'parent'
+            geoDict['title'] = title
+        else:
+            geoDict['hierarchy'] = 'child'
+            bit_parts = bitstream.rsplit('.', 1)
+            bit_title = bit_parts[0]
+            geoDict['title'] = bit_title
 
-        f.writerow([itemID]+[uri]+[bib]+[oclc]+[lang]+[authors]+[contributors]+[descs]+[title]+[alt_title]+[subjects]+[date1]+[collection]+[publisher]+[type])
+        values = list(geoDict.values())
+
+        f.writerows([values])

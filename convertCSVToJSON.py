@@ -62,7 +62,6 @@ with open(filename) as geoMetadata:
         addListToDict(json_file, 'dc_subject_sm', 'subject')
         addToDict(json_file, 'dc_type_s', 'type')
         addListToDict(json_file, 'dct_isPartOf_sm', 'isPartOf')
-        addToDict(json_file, 'dc_type_s', 'type')
         addDictToDict(json_file, 'dct_references_s', 'references')
         addListToDict(json_file, 'dct_spatial_sm', 'spatial')
         addListToDict(json_file, 'dct_temporal_sm', 'temporal')
@@ -70,12 +69,12 @@ with open(filename) as geoMetadata:
         addToDict(json_file, 'layer_id_s', 'layer_id')
         addToDict(json_file, 'layer_modified_dt', 'layer_modified')
         addToDict(json_file, 'suppressed_b', 'suppressed')
-        json_file['dct_provenance_s'] = 'Hopkins'
+        json_file['dct_provenance_s'] = 'Johns_Hopkins'
         json_file['geoblacklight_version'] = '1.0'
         print(json_file)
         dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
         filename = identifier.replace('http://hopkinsgeoportal/', '')
-        with open(filename+date_time+'.json', 'w') as fp:
+        with open(filename+dt+'.json', 'w') as fp:
             json.dump(json_file, fp)
 
         with open(filename+'_'+dt+'.json', 'r') as results:
