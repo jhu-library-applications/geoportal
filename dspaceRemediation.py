@@ -17,7 +17,7 @@ else:
 if args.hierarchy:
     hierarchy = args.hierarchy
 else:
-    hierarchy = input('Enter hierarchy, parent or child: ')
+    hierarchy = input('Enter hierarchy, solo, parent, or child: ')
 
 fileDir = os.path.dirname(__file__)
 
@@ -80,7 +80,6 @@ with open(filename) as geoMetadata:
         geoDict = dict.fromkeys(keyList)
         id = uuid.uuid4()
         uri = row['dc.identifier.uri']
-        geoDict['identifier'] = id
         bitstream = key_finder('bitstream_1')
         bitstream_2 = key_finder('bitstream_2')
         bitstreams = [bitstream, bitstream_2]
@@ -108,7 +107,8 @@ with open(filename) as geoMetadata:
         type = key_finder('dc.type')
         bib = key_finder('dc.identifier.localbibnumber')
 
-        geoDict['identifier'] = id
+        geoDict['identifier'] = 'http://hopkinsgeoportal/'+id
+        geoDict['layer_slug'] = id
         geoDict['uri'] = uri
         geoDict['bitstreams'] = bitstreams
         geoDict['references'] = references
@@ -136,14 +136,14 @@ with open(filename) as geoMetadata:
                     lang[count] = v
         lang = '|'.join(lang)
         geoDict['language'] = lang
-        if hierarchy == 'parent':
-            geoDict['hierarchy'] = 'parent'
-            geoDict['title'] = title
-        else:
-            geoDict['hierarchy'] = 'child'
+        if hierarchy == 'child':
+            geoDict['hierarchy'] = hierarchy
             bit_parts = bitstream.rsplit('.', 1)
             bit_title = bit_parts[0]
             geoDict['title'] = bit_title
+        else:
+            geoDict['hierarchy'] = hierarchy
+            geoDict['title'] = title
 
         values = list(geoDict.values())
 

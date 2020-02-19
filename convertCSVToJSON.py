@@ -4,6 +4,7 @@ import argparse
 from jsonschema import validate
 from datetime import datetime
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
 args = parser.parse_args()
@@ -12,6 +13,33 @@ if args.file:
     filename = args.file
 else:
     filename = input('Enter filename (including \'.csv\'): ')
+
+
+def fixGeom(json_file, key, value):
+    try:
+        value = row[value]
+        if value:
+            value = value.replace('ENVELOPE(', "").replace(")", "")
+            e_value = value.split(",")
+            e_value = e_value[0]+','+e_value[2]+','+e_value[3]+','+e_value[1]
+            e_value = 'ENVELOPE('+e_value+')'
+            json_file[key] = e_value
+    except KeyError:
+        pass
+
+
+def fixRef(json_file, key, value):
+    try:
+        value = row[value]
+        if value:
+            value = value.replace("'h", "\"h")
+            value = value.replace("':", "\":")
+            value = value.replace("',", "\",")
+            value = value.replace("'}", "\"}")
+            value = str(value)
+            json_file[key] = value
+    except KeyError:
+        pass
 
 
 def addToDict(json_file, key, value):
@@ -51,12 +79,11 @@ with open(filename) as geoMetadata:
         json_file = {}
         identifier = row['identifier']
         hierarchy = row['hierarchy']
-        identifier = 'http://hopkinsgeoportal/'+identifier
         json_file['dc_identifier_s'] = identifier
         addToDict(json_file, 'dc_rights_s', 'rights')
         addToDict(json_file, 'dc_title_s', 'title')
         addToDict(json_file, 'layer_slug_s', 'layer_slug')
-        addToDict(json_file, 'solr_geom', 'solr_geom')
+        fixGeom(json_file, 'solr_geom', 'solr_geom')
         addToDictInt(json_file, 'solr_year_i', 'solr_year')
         addListToDict(json_file, 'dc_creator_sm', 'creators')
         addToDict(json_file, 'dc_description_s', 'description')
@@ -67,7 +94,7 @@ with open(filename) as geoMetadata:
         addListToDict(json_file, 'dc_subject_sm', 'subject')
         addToDict(json_file, 'dc_type_s', 'type')
         addListToDict(json_file, 'dct_isPartOf_sm', 'isPartOf')
-        addToDict(json_file, 'dct_references_s', 'references')
+        fixRef(json_file, 'dct_references_s', 'references')
         addListToDict(json_file, 'dct_spatial_sm', 'spatial')
         addListToDict(json_file, 'dct_temporal_sm', 'temporal')
         addToDict(json_file, 'layer_geom_type_s', 'geom_type')
