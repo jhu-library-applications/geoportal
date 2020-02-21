@@ -26,6 +26,7 @@ f.writerow(['link']+['itemID']+['j_bib']+['m_bib']+['j_title']+['j_date']+['m_ti
 
 with open(filename) as itemMetadataFile:
     itemMetadata = csv.DictReader(itemMetadataFile)
+    # Open DSpace records from CSV.
     for row in itemMetadata:
         j_uri = row['dc.identifier.uri']
         itemID = row['itemID']
@@ -38,20 +39,25 @@ with open(filename) as itemMetadataFile:
             print(j_bib)
         with open(filename2) as otherMetadata:
             otherMetadata = csv.DictReader(otherMetadata)
+            # Open MARC records from CSV.
             for row in otherMetadata:
                 m_uris = row['links'].split('|')
                 m_title = row['title']
                 m_bib = row['bib']
                 m_date = row['date1']
+                # Find title fuzzy ratio.
                 ratio = fuzz.ratio(j_title, m_bib)
+                # Try to match by URI.
                 if j_uri in m_uris:
                     f.writerow([j_uri]+[itemID]+[j_bib]+[m_bib]+[j_title]+[j_date]+[m_title]+[m_date]+['exact'])
                     print("found: "+j_uri)
                     break
+                # Try to match by Horizon bib number.
                 elif j_bib == m_bib:
                     f.writerow([j_uri]+[itemID]+[j_bib]+[m_bib]+[j_title]+[j_date]+[m_title]+[m_date]+['exact'])
                     print("found: "+j_uri)
                     break
+                # Try to match title with fuzzy matching.
                 elif ratio > 95:
                     f.writerow([j_uri]+[itemID]+[j_bib]+[m_bib]+[j_title]+[j_date]+[m_title]+[m_date]+['probable match'])
                     print("found: "+j_uri)

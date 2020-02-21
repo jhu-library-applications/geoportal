@@ -4,18 +4,17 @@ import argparse
 import re
 import os
 from datetime import datetime
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
 args = parser.parse_args()
-
 if args.file:
     filename = args.file
 else:
     filename = input('Enter filename (including \'.mrc\'): ')
 
 fileDir = os.path.dirname(__file__)
-
 
 gacs_dict = {}
 types_dict = {}
@@ -38,43 +37,57 @@ createDict(os.path.join(fileDir, 'dictionaries/gacs_code.csv'), 'code', 'locatio
 createDict(os.path.join(fileDir, 'dictionaries/marc_006types.csv'), 'Type', 'Name', types_dict)
 #  Import date type codes used in leader 008.
 createDict(os.path.join(fileDir, 'dictionaries/marc_datetypes.csv'), 'Type', 'Name', datetypes_dict)
+# Import language codes used in Lang.
 createDict(os.path.join(fileDir, 'dictionaries/marc_lang.csv'), 'Code', 'Name', lang_dict)
 
 
 #  Creates k,v pair in dict where key = field_name, value = values of MARC tags in record.
 def field_finder(record, field_name, tags):
-    field = record.get_fields(*tags)
     field_list = []
+    field = record.get_fields(*tags)
     for my_field in field:
         my_field = my_field.format_field()
         field_list.append(my_field)
-    mrc_fields[field_name] = field_list
+    if field_list:
+        field_list = '|'.join(str(e) for e in field_list)
+        mrc_fields[field_name] = field_list
+    else:
+        mrc_fields[field_name] = ''
 
 
 # Creates k,v pair in dict where key = field_name, value = values of specific subfield in MARC tag in record.
 def subfield_finder(record, field_name, subfields, tags):
-    field = record.get_fields(*tags)
     field_list = []
+    field = record.get_fields(*tags)
     for my_field in field:
-        my_field = my_field.get_subfields(*subfields)
-        for field in my_field:
+        my_subfield = my_field.get_subfields(*subfields)
+        for field in my_subfield:
             field_list.append(field)
-    mrc_fields[field_name] = field_list
+    if field_list:
+        field_list = '|'.join(str(e) for e in field_list)
+        mrc_fields[field_name] = field_list
+    else:
+        mrc_fields[field_name] = ''
 
 
 # Converts code from MARC record into name from imported dictionaries.
 def convert_to_name(keyname, dictname):
     for k, v in mrc_fields.items():
         if k == keyname:
-            for count, item in enumerate(v):
+            if isinstance(v, list):
+                for count, item in enumerate(v):
+                    for key, value in dictname.items():
+                        if item == key:
+                            v[count] = value
+                mrc_fields[k] = v
+            else:
                 for key, value in dictname.items():
-                    if item == key:
-                        v[count] = value
+                    if v == key:
+                        mrc_fields[k] = value
 
 
 all_fields = []
 record_count = 0
-
 with open(filename, 'rb') as fh:
     marc_recs = MARCReader(fh, to_unicode=True)
     for record in marc_recs:
@@ -98,18 +111,28 @@ with open(filename, 'rb') as fh:
         subfield_finder(record, 'cdates', subfields=['x', 'y'], tags=['034'])
         subfield_finder(record, 'geos', subfields=['c'], tags=['255'])
         subfield_finder(record, 'locs', subfields=['a'], tags=['043'])
-        mrc_fields['type'] = [leader[6]]
-        keys = []
+        mrc_fields['type'] = leader[6]
+        convert_to_name('locs', gacs_dict)
+        convert_to_name('type', types_dict)
+
         # Edit & convert values in dictionary.
         for k, v in mrc_fields.items():
-            if k == '008':  # Find Lang codes, DtSt and Dates from field 008.
-                v = str(v[0])
-                datetype = [v[6]]
-                date1 = v[7:11].strip()
-                date2 = v[11:15].strip()
-                lang = [v[35:38]]
-            elif k == 'oclc':  # Finds only oclc number, deleting prefixes.
+            # Find Lang codes, DtSt and Dates from field 008.
+            if k == '008':
+                if v:
+                    datetype = v[6]
+                    date1 = v[7:11].strip()
+                    date2 = v[11:15].strip()
+                    lang = v[35:38]
+                else:
+                    datetype = ''
+                    date1 = ''
+                    date2 = ''
+                    lang = ''
+            # Finds only oclc number, deleting prefixes.
+            elif k == 'oclc' and v != '':
                 oclc_list = []
+                v = v.split('|')
                 for item in v:
                     item = str(item)
                     oclc_num = re.search(r'([0-9]+)', item)
@@ -118,42 +141,23 @@ with open(filename, 'rb') as fh:
                         if oclc_num not in oclc_list:
                             if oclc_num != mrc_fields['bib'][0]:
                                 oclc_list.append(oclc_num)
-                v = oclc_list
+                v = '|'.join(str(e) for e in oclc_list)
                 mrc_fields[k] = v
 
         del mrc_fields['008']
         mrc_fields['datetype'] = datetype
+        convert_to_name('datetype', datetypes_dict)
         mrc_fields['date1'] = date1
         mrc_fields['date2'] = date2
         mrc_fields['lang'] = lang
-        convert_to_name('datetype', datetypes_dict)
-        convert_to_name('locs', gacs_dict)
-        convert_to_name('type', types_dict)
         convert_to_name('lang', lang_dict)
 
-        # Converts list values in k,v pair to strings joined by pipes.
-        for k, v in mrc_fields.items():
-            keys.append(k)
-            if isinstance(v, list):
-                if len(v) >= 2:
-                    v = "|".join(v)
-                    mrc_fields[k] = v
-                elif len(v) == 1:
-                    v = str(v[0])
-                    mrc_fields[k] = v
-                elif len(v) == 0:
-                    v = ''
-                    mrc_fields[k] = v
-                else:
-                    pass
         # Adds dict created by this MARC record to all_fields list.
         all_fields.append(mrc_fields)
         record_count = record_count + 1
         print(record_count)
 
+df = pd.DataFrame.from_dict(all_fields)
+print(df.head(15))
 dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
-
-with open('marcRecords_'+dt+'.csv', 'w') as output_file:
-    dict_writer = csv.DictWriter(output_file, keys)
-    dict_writer.writeheader()
-    dict_writer.writerows(all_fields)
+df.to_csv(path_or_buf='marcRecords_'+dt+'.csv', header='column_names', encoding='utf-8', sep=',', index=False)
