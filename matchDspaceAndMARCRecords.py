@@ -68,11 +68,13 @@ with open(filename) as itemMetadataFile:
                 # Try to match by URI.
                 if j_uri in m_uris:
                     addMARC()
+                    j_dict.pop('ratio', None)
                     j_dict['match'] = 'exact'
                     break
                 # Try to match by Horizon bib number.
                 elif j_bib == m_bib:
                     addMARC()
+                    j_dict.pop('ratio', None)
                     j_dict['match'] = 'exact'
                     break
                 # Try to match title with fuzzy matching.
@@ -80,10 +82,12 @@ with open(filename) as itemMetadataFile:
                     old_ratio = j_dict.get(ratio)
                     if (old_ratio is None) or (old_ratio < ratio):
                         addMARC()
-                        j_dict['ratio'] = [ratio]
+                        j_dict['ratio'] = ratio
                         j_dict['match'] = 'probable'
                     else:
                         pass
+            else:
+                j_dict['match'] = 'none'
                 # elif p_ratio > 95 and m_date == j_date:
                 #     old_ratio = j_dict.get(p_ratio)
                 #     if old_ratio < p_ratio:
@@ -92,8 +96,6 @@ with open(filename) as itemMetadataFile:
                 #         j_dict['match'] = 'probable'
                 #     else:
                 #         pass
-            else:
-                j_dict['match'] = 'none'
         all_files.append(j_dict)
 
 df = pd.DataFrame.from_dict(all_files)
