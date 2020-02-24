@@ -3,6 +3,7 @@ import argparse
 import re
 from fuzzywuzzy import fuzz
 from datetime import datetime
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
@@ -13,30 +14,45 @@ if args.file:
     filename = args.file
 else:
     filename = input('Enter filename (including \'.csv\'): ')
-
 if args.file2:
     filename2 = args.file2
 else:
     filename2 = input('Enter filename (including \'.csv\'): ')
 
-dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
 
-f = csv.writer(open('matchDSpaceAndMARCRecords'+dt+'.csv', 'w', encoding='utf-8'))
-f.writerow(['link']+['itemID']+['j_bib']+['m_bib']+['j_title']+['j_date']+['m_title']+['m_date']+['match'])
+def addToDict(key, value):
+    try:
+        value = row[value]
+        if value:
+            value = value.strip()
+            j_dict[key] = value
+            return value
+    except KeyError:
+        pass
 
+
+def addMARC():
+    j_dict['m_bib'] = m_bib
+    j_dict['m_title'] = m_title
+    j_dict['m_date'] = m_date
+    j_dict['m_category'] = m_category
+
+
+all_files = []
 with open(filename) as itemMetadataFile:
     itemMetadata = csv.DictReader(itemMetadataFile)
     # Open DSpace records from CSV.
     for row in itemMetadata:
-        j_uri = row['dc.identifier.uri']
-        itemID = row['itemID']
-        j_title = row['dc.title']
-        j_date = row['dc.date.issued']
+        j_dict = {}
+        j_uri = addToDict('j_uri', 'dc.identifier.uri')
+        itemID = addToDict('itemID', 'itemID')
+        j_title = addToDict('j_title', 'dc.title')
+        j_date = addToDict('j_date', 'dc.date.issued')
         j_bib = row['dc.identifier.localbibnumber'].strip()
         if j_bib:
             j_bib = re.search(r'[0-9]+', j_bib)
             j_bib = j_bib.group()
-            print(j_bib)
+            j_dict['j_bib'] = j_bib
         with open(filename2) as otherMetadata:
             otherMetadata = csv.DictReader(otherMetadata)
             # Open MARC records from CSV.
@@ -45,22 +61,42 @@ with open(filename) as itemMetadataFile:
                 m_title = row['title']
                 m_bib = row['bib']
                 m_date = row['date1']
+                m_category = row['category']
                 # Find title fuzzy ratio.
-                ratio = fuzz.ratio(j_title, m_bib)
+                ratio = fuzz.ratio(j_title, m_title)
+                # p_ratio = fuzz.partial_ratio(j_title, m_title)
                 # Try to match by URI.
                 if j_uri in m_uris:
-                    f.writerow([j_uri]+[itemID]+[j_bib]+[m_bib]+[j_title]+[j_date]+[m_title]+[m_date]+['exact'])
-                    print("found: "+j_uri)
+                    addMARC()
+                    j_dict['match'] = 'exact'
                     break
                 # Try to match by Horizon bib number.
                 elif j_bib == m_bib:
-                    f.writerow([j_uri]+[itemID]+[j_bib]+[m_bib]+[j_title]+[j_date]+[m_title]+[m_date]+['exact'])
-                    print("found: "+j_uri)
+                    addMARC()
+                    j_dict['match'] = 'exact'
                     break
                 # Try to match title with fuzzy matching.
-                elif ratio > 95:
-                    f.writerow([j_uri]+[itemID]+[j_bib]+[m_bib]+[j_title]+[j_date]+[m_title]+[m_date]+['probable match'])
-                    print("found: "+j_uri)
-                    break
+                elif ratio > 90 and m_date == j_date:
+                    old_ratio = j_dict.get(ratio)
+                    if (old_ratio is None) or (old_ratio < ratio):
+                        addMARC()
+                        j_dict['ratio'] = [ratio]
+                        j_dict['match'] = 'probable'
+                    else:
+                        pass
+                # elif p_ratio > 95 and m_date == j_date:
+                #     old_ratio = j_dict.get(p_ratio)
+                #     if old_ratio < p_ratio:
+                #         addMARC()
+                #         j_dict['ratio'] = [ratio]
+                #         j_dict['match'] = 'probable'
+                #     else:
+                #         pass
             else:
-                f.writerow([j_uri]+[itemID]+[j_bib]+['none']+[j_title]+[j_date]+['none']+['none']+['no match'])
+                j_dict['match'] = 'none'
+        all_files.append(j_dict)
+
+df = pd.DataFrame.from_dict(all_files)
+print(df.head(15))
+dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
+df.to_csv(path_or_buf='matchedDspaceAndMARC_'+dt+'.csv', header='column_names', encoding='utf-8', sep=',', index=False)

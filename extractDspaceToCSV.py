@@ -59,10 +59,9 @@ def combine_keys(keyList):
 def create_references(uri, bitstream):
     dict = {}
     dict['http://schema.org/url'] = uri
-    if bitstream:
-        uri = uri.replace('jhir', 'jscholarship')
-        bitstream_url = uri+'/'+bitstream
-        dict['http://schema.org/downloadUrl'] = bitstream_url
+    if image_link:
+        dict['http://iiif.io/api/image'] = image_link
+        dict['http://schema.org/downloadUrl'] = image_link
     return dict
 
 
@@ -106,6 +105,7 @@ with open(filename) as geoMetadata:
         publisher = key_finder('dc.publisher')
         type = key_finder('dc.type')
         bib = key_finder('dc.identifier.localbibnumber')
+        image_link = key_finder('image_link')
 
         geoDict['identifier'] = 'http://hopkinsgeoportal/'+id
         geoDict['layer_slug'] = id

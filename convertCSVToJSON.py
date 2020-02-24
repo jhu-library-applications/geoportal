@@ -18,12 +18,21 @@ else:
 def fixGeom(json_file, key, value):
     try:
         value = row[value]
-        if value:
-            value = value.replace('ENVELOPE(', "").replace(")", "")
-            e_value = value.split(",")
-            e_value = e_value[0]+','+e_value[2]+','+e_value[3]+','+e_value[1]
-            e_value = 'ENVELOPE('+e_value+')'
-            json_file[key] = e_value
+        value = value.split(',')
+        # Converts (West, South, East, North) --> (West, East, North, South)
+        if len(value) == 4:
+            west = value[0]
+            south = value[1]
+            east = value[2]
+            north = value[3]
+            centerlat = (float(north)+float(south))/2
+            centerlong = (float(east)+float(west))/2
+            json_file[key] = 'ENVELOPE('+west+','+east+','+north+','+south+')'
+            json_file['b1g_centroid_ss'] = str(centerlat)+','+str(centerlong)
+        # If the bounding box missing coordinates, write values as null.
+        else:
+            json_file[key] = 'NULL'
+            json_file['b1g_centroid_ss'] = 'NULL'
     except KeyError:
         pass
 
@@ -32,6 +41,7 @@ def fixRef(json_file, key, value):
     try:
         value = row[value]
         if value:
+            value = value.replace(u'\u2018', "'").replace(u'\u2019', "'")
             value = value.replace("'h", "\"h")
             value = value.replace("':", "\":")
             value = value.replace("',", "\",")

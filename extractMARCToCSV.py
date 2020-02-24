@@ -20,6 +20,7 @@ gacs_dict = {}
 types_dict = {}
 datetypes_dict = {}
 lang_dict = {}
+cat_dict = {}
 
 
 def createDict(csvname, column1, column2, dictname):
@@ -33,12 +34,14 @@ def createDict(csvname, column1, column2, dictname):
 
 #  Import gacs codes used in 043 fields.
 createDict(os.path.join(fileDir, 'dictionaries/gacs_code.csv'), 'code', 'location', gacs_dict)
-#  Import type codes used in leader 006.
+#  Import type codes used in 006.
 createDict(os.path.join(fileDir, 'dictionaries/marc_006types.csv'), 'Type', 'Name', types_dict)
-#  Import date type codes used in leader 008.
+#  Import date type codes used in 008.
 createDict(os.path.join(fileDir, 'dictionaries/marc_datetypes.csv'), 'Type', 'Name', datetypes_dict)
 # Import language codes used in Lang.
 createDict(os.path.join(fileDir, 'dictionaries/marc_lang.csv'), 'Code', 'Name', lang_dict)
+# Import category codes used in 007.
+createDict(os.path.join(fileDir, 'dictionaries/marc_007categoryMaterial.csv'), 'code', 'name', cat_dict)
 
 
 #  Creates k,v pair in dict where key = field_name, value = values of MARC tags in record.
@@ -104,6 +107,7 @@ with open(filename, 'rb') as fh:
         field_finder(record, 'subjects', tags=['600', '610', '650', '651'])
         field_finder(record, 'descs', tags=['500', '520'])
         field_finder(record, '008', tags=['008'])
+        field_finder(record, 'category', tags=['007'])
         mrc_fields['title'] = record.title()
         subfield_finder(record, 'alt_title', subfields=['a', 'b'], tags=['246'])
         subfield_finder(record, 'scales', subfields=['a', 'b', 'c'], tags=['034'])
@@ -111,9 +115,13 @@ with open(filename, 'rb') as fh:
         subfield_finder(record, 'cdates', subfields=['x', 'y'], tags=['034'])
         subfield_finder(record, 'geos', subfields=['c'], tags=['255'])
         subfield_finder(record, 'locs', subfields=['a'], tags=['043'])
+        catValue = mrc_fields.get('category')
+        if catValue:
+            mrc_fields['category'] = catValue[0]
         mrc_fields['type'] = leader[6]
         convert_to_name('locs', gacs_dict)
         convert_to_name('type', types_dict)
+        convert_to_name('category', cat_dict)
 
         # Edit & convert values in dictionary.
         for k, v in mrc_fields.items():
