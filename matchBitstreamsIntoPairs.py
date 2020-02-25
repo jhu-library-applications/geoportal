@@ -11,8 +11,16 @@ else:
     filename = input('Enter filename (including \'.csv\'): ')
 
 df = pd.read_csv(filename)
-bitstreams = df.bitstream.str.rsplit('.')
-ext = bitstreams[1].lowercase()
-bit_name = bitstreams[0]
+bitstreams = df.bitstream.str.rsplit('.', 1)
+bit_name = [x[0] for x in bitstreams]
+ext = [x[1] for x in bitstreams]
+df['bit_name'] = bit_name
 df['ext'] = ext
-df['bit_name']
+print(df.head)
+
+new_df = df.copy()
+
+df2 = df.merge(new_df, on=('bit_name', 'handle', 'title'), how='inner', copy=False)
+df2 = df2.drop_duplicates()
+print(df2.columns)
+print(df2)
