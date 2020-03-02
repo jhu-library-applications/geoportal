@@ -36,10 +36,19 @@ for count, e in enumerate(exts):
         bitstream_name = 'bitstream_'+str(count)
         bit_names.append(bitstream_name)
 
-all_df['bitstreams'] = all_df[bit_names].values.astype(str).tolist()
+combined_list = []
+for index, row in enumerate(all_df[bit_names].values):
+    combined = []
+    for value in row:
+        if isinstance(value, str):
+            combined.append(value)
+    combined_list.append(combined)
+all_df['bitstreams'] = combined_list
 
-all_df = all_df.drop(columns=['bit_name', 'ext'])
 all_df = all_df.drop(columns=bit_names)
+all_df = all_df.drop(columns=['bit_name', 'ext'])
+
 print(all_df.head)
 dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
-all_df.to_csv(path_or_buf='matchy_'+dt+'.csv', header='column_names', encoding='utf-8', sep=',', index=False)
+new_name = filename.replace('.csv', '').replace('handlesAndBitstreams', '')
+all_df.to_csv(path_or_buf=new_name+'matchedBitstreams_'+dt+'.csv', header='column_names', encoding='utf-8', sep=',', index=False)
