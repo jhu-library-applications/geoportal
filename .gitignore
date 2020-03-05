@@ -58,6 +58,10 @@ local/*
 *.xml
 *.xlsx
 figuringout.py
+quickmerge.py
+quickmerge1.py
+fixcsv.py
+
 
 !geoblacklight-schema.json
 !gacs_code.csv
