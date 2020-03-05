@@ -6,13 +6,13 @@ This script combines metadata for one item from two different CSVs and uploads t
 
 ## convertCSVToJSON.py
 
-This script converts a CSV with metadata to a JSON file that follows the [GeoBlacklight Metadata Elements, Version 1.0](https://github.com/geoblacklight/geoblacklight/wiki/GeoBlacklight-1.0-Metadata-Elements).This script does not edit the majority of information from the CSV, only converts it to JSON. It does, however, reorder the bounding box coordinates from the Klokan Tech Bounding Box tool, and calculates the center of the box. It also add backslashes to the reference elements and checks for curly quotes.  
+This script converts a CSV with metadata to a JSON file that follows the [GeoBlacklight Metadata Elements, Version 1.0](https://github.com/geoblacklight/geoblacklight/wiki/GeoBlacklight-1.0-Metadata-Elements). This script does not edit the majority of information from the CSV, only converts it to JSON. It does, however, reorder the bounding box coordinates from the Klokan Tech Bounding Box tool, and calculates the center of the box. It also add backslashes to the reference elements and checks for curly quotes.  
 
 Enter the CSV column names as the third parameter of either function addToDict or addListToDict, depending on whether there are multiple entries in that column. If there are multiple entries in a column, separate entries with "|". These will automatically be separated by the addListToDict function.
 
 ## extractDspaceToCSV.py
 
-This script selects metadata previously pulled from DSpace and re-organizes it for future use as [GeoBlacklight Metadata](https://github.com/geoblacklight/geoblacklight/wiki/GeoBlacklight-1.0-Metadata-Elements).The script does this by checking for information from select DSpace elements for importation into a new CSV. Much of this script is specific to Hopkins' implementation of DSpace.
+This script selects metadata previously pulled from DSpace and re-organizes it for future use as [GeoBlacklight Metadata](https://github.com/geoblacklight/geoblacklight/wiki/GeoBlacklight-1.0-Metadata-Elements). The script does this by checking for information from select DSpace elements for importation into a new CSV. Much of this script is specific to Hopkins' implementation of DSpace.
 
 ## extractMARCToCSV.py
 
