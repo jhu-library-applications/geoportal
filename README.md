@@ -16,7 +16,7 @@ This script selects metadata previously pulled from DSpace and re-organizes it f
 
 ## extractMARCToCSV.py
 
-This script uses [pymarc]https://pypi.org/project/pymarc/) to find fields relevant to GeoBlacklight metadata from MARC records. It also uses four dictionaries to translate certain MARC codes into written strings.
+This script uses [pymarc](https://pypi.org/project/pymarc/) to find fields relevant to GeoBlacklight metadata from MARC records. It also uses four dictionaries to translate certain MARC codes into written strings.
 
 ## matchBitstreamsIntoPairs.py
 
