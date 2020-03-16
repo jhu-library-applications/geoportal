@@ -12,18 +12,60 @@ else:
     filename = input('Enter filename (including \'.csv\'): ')
 
 df = pd.read_csv(filename)
-df = df.drop(columns=['description', 'date'])
-pivoted = pd.pivot_table(df, index=['bitstream'], values='uri', aggfunc=lambda x: ','.join(str(v) for v in x))
-print(pivoted.sort_values(ascending=True, by='bitstream').head())
+bitstreams = df.bitstream.str.rsplit('.', 1)
+ext = [x[1] for x in bitstreams]
+ext = [e.lower() for e in ext]
+df['ext'] = ext
+
+pivoted = pd.pivot_table(df, index=['handle'], values=['ext', 'bitstream'], aggfunc=lambda x: ','.join(str(v) for v in x))
+print(pivoted.sort_values(ascending=True, by='handle').head())
 
 df = pd.DataFrame(pivoted)
 df = df.reset_index()
 
+unique = []
+pres_list = []
+for index, value in df.ext.items():
+    values = value.split(',')
+    values = list(set(values))
+    unique.append(values)
+    pres = []
+    if len(values) == 1:
+        pres.append(values[0])
+    else:
+        for v in values:
+            if v == 'tif':
+                pres.append(v)
+            elif v == 'tiff':
+                pres.append(v)
+            elif v == 'jp2':
+                pres.append(v)
+            else:
+                pass
+    pres_list.append(pres)
 
-bitstreams = df.bitstream.str.rsplit('.', 1)
-bit_name = [x.rsplit('.', 1) for x in bitstream]
-ext = [x[1] for x in bitstreams]
-ext = [e.lower() for e in ext]
+df['unique'] = unique
+df['pres'] = pres_list
+del df['ext']
+
+pres_bits = []
+for index, value in df.bitstream.items():
+    exts = df.at[index, 'pres']
+    bits = []
+    values = value.split(',')
+    print(values)
+    for v in values:
+        v_list = v.rsplit('.', 1)
+        try:
+            if v_list[1].lower() in exts:
+                bits.append(v)
+            else:
+                pass
+        except IndexError:
+            pass
+    pres_bits.append(bits)
+
+df['pres_bits'] = pres_bits
 
 print(df.head)
 dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
