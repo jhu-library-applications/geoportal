@@ -14,6 +14,7 @@ if args.file:
 else:
     filename = input('Enter filename (including \'.mrc\'): ')
 
+
 fileDir = os.path.dirname(__file__)
 
 types_dict = {}
@@ -83,55 +84,56 @@ def convert_to_name(keyname, dictname):
 
 all_fields = []
 record_count = 0
-with open(filename, 'rb') as fh:
-    marc_recs = MARCReader(fh, to_unicode=True)
-    for record in marc_recs:
-        mrc_fields = {}
-        leader = record.leader
-        #  Finds fields/subfield values in record.
-        subfield_finder(record, 'number', subfields=['a'], tags=['010'])
-        field_finder(record, 'headings', tags=['100', '110', '111', '130'])
-        field_finder(record, 'desc', tags=['336', '368', '370', '371', '372', '373'])
-        field_finder(record, 'alt_names', tags=['400', '410', '411', '430'])
-        field_finder(record, 'see_also', tags=['510', '511', '530'])
-        field_finder(record, 'unauthorized_forms', tags=['663', '664', '665', '666'])
-        field_finder(record, 'linked_headings', tags=['710', '711'])
-        field_finder(record, 'source', tags=['670'])
-        field_finder(record, '008', tags=['008'])
-        field_finder(record, 'last_updated', tags=['005'])
-        mrc_fields['type'] = [leader[6]]
+for filename in filenames:
+    with open(filename, 'rb') as fh:
+        marc_recs = MARCReader(fh, to_unicode=True)
+        for record in marc_recs:
+            mrc_fields = {}
+            leader = record.leader
+            #  Finds fields/subfield values in record.
+            subfield_finder(record, 'number', subfields=['a'], tags=['010'])
+            field_finder(record, 'headings', tags=['100', '110', '111', '130'])
+            field_finder(record, 'desc', tags=['336', '368', '370', '371', '372', '373'])
+            field_finder(record, 'alt_names', tags=['400', '410', '411', '430'])
+            field_finder(record, 'see_also', tags=['510', '511', '530'])
+            field_finder(record, 'unauthorized_forms', tags=['663', '664', '665', '666'])
+            field_finder(record, 'linked_headings', tags=['710', '711'])
+            field_finder(record, 'source', tags=['670'])
+            field_finder(record, '008', tags=['008'])
+            field_finder(record, 'last_updated', tags=['005'])
+            mrc_fields['type'] = [leader[6]]
 
-        # Edit & convert values in dictionary.
-        for k, v in mrc_fields.items():
-            # Find Lang codes, DtSt and Dates from field 008.
-            if k == '008':
-                if v:
-                    type = v[9]
-                    level = v[33]
-                    cat_source = v[39]
-                else:
-                    type = ''
-                    level = ''
-                    cat_source = ''
-            elif k == 'last_updated':
-                v = v[:4]
-                mrc_fields[k] = v
-            elif k == 'number':
-                v = v.replace(" ", "").strip()
-                mrc_fields[k] = v
+            # Edit & convert values in dictionary.
+            for k, v in mrc_fields.items():
+                # Find Lang codes, DtSt and Dates from field 008.
+                if k == '008':
+                    if v:
+                        type = v[9]
+                        level = v[33]
+                        cat_source = v[39]
+                    else:
+                        type = ''
+                        level = ''
+                        cat_source = ''
+                elif k == 'last_updated':
+                    v = v[:4]
+                    mrc_fields[k] = v
+                elif k == 'number':
+                    v = v.replace(" ", "").strip()
+                    mrc_fields[k] = v
 
-        del mrc_fields['008']
-        mrc_fields['type'] = type
-        mrc_fields['level'] = level
-        mrc_fields['cat_source'] = cat_source
-        convert_to_name('type', types_dict)
-        convert_to_name('level', level_dict)
-        convert_to_name('cat_source', catsource_dict)
+            del mrc_fields['008']
+            mrc_fields['type'] = type
+            mrc_fields['level'] = level
+            mrc_fields['cat_source'] = cat_source
+            convert_to_name('type', types_dict)
+            convert_to_name('level', level_dict)
+            convert_to_name('cat_source', catsource_dict)
 
-        # Adds dict created by this MARC record to all_fields list.
-        all_fields.append(mrc_fields)
-        record_count = record_count + 1
-        print(record_count)
+            # Adds dict created by this MARC record to all_fields list.
+            all_fields.append(mrc_fields)
+            record_count = record_count + 1
+            print(record_count)
 
 df = pd.DataFrame.from_dict(all_fields)
 print(df.head(15))
