@@ -1,488 +1,488 @@
-language,code
-Afar,aa
-Abkhazian,ab
-Achinese,ace
-Acoli,ach
-Adangme,ada
-Adyghe; Adygei,ady
-Avestan,ae
-Afrikaans,af
-Afro-Asiatic languages,afa
-Afrihili,afh
-Ainu,ain
-Akan,ak
-Akkadian,akk
-Albanian,sq
-Aleut,ale
-Algonquian languages,alg
-Southern Altai,alt
-Amharic,am
-Aragonese,an
-"English, Old (ca.450-1100)",ang
-Angika,anp
-Apache languages,apa
-Arabic,ar
-Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE),arc
-Armenian,hy
-Mapudungun; Mapuche,arn
-Arapaho,arp
-Artificial languages,art
-Arawak,arw
-Assamese,as
-Asturian; Bable; Leonese; Asturleonese,ast
-Athapascan languages,ath
-Australian languages,aus
-Avaric,av
-Awadhi,awa
-Aymara,ay
-Azerbaijani,az
-Bashkir,ba
-Banda languages,bad
-Bamileke languages,bai
-Baluchi,bal
-Bambara,bm
-Balinese,ban
-Basque,eu
-Basa,bas
-Baltic languages,bat
-Belarusian,be
-Beja; Bedawiyet,bej
-Bemba,bem
-Bengali,bn
-Berber languages,ber
-Bulgarian,bg
-Bihari languages,bh
-Bhojpuri,bho
-Bislama,bi
-Bikol,bik
-Bini; Edo,bin
-Siksika,bla
-Bantu languages,bnt
-Tibetan,bo
-Bosnian,bs
-Breton,br
-Braj,bra
-Batak languages,btk
-Buriat,bua
-Buginese,bug
-Burmese,my
-Blin; Bilin,byn
-Catalan; Valencian,ca
-Caddo,cad
-Central American Indian languages,cai
-Galibi Carib,car
-Caucasian languages,cau
-Chechen,ce
-Cebuano,ceb
-Celtic languages,cel
-Chamorro,ch
-Chibcha,chb
-Chagatai,chg
-Chinese,zh
-Chuukese,chk
-Mari,chm
-Chinook jargon,chn
-Choctaw,cho
-Chipewyan; Dene Suline,chp
-Cherokee,chr
-Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic,cu
-Chuvash,cv
-Cheyenne,chy
-Chamic languages,cmc
-Montenegrin,cnr
-Corsican,co
-Coptic,cop
-Cornish,kw
-"Creoles and pidgins, English based",cpe
-"Creoles and pidgins, French-based",cpf
-"Creoles and pidgins, Portuguese-based",cpp
-Cree,cr
-Crimean Tatar; Crimean Turkish,crh
-Creoles and pidgins,crp
-Czech,cs
-Kashubian,csb
-Cushitic languages,cus
-Welsh,cy
-Danish,da
-Dakota,dak
-Dargwa,dar
-Land Dayak languages,day
-German,de
-Delaware,del
-Slave (Athapascan),den
-Dogrib,dgr
-Dinka,din
-Divehi; Dhivehi; Maldivian,dv
-Dogri,doi
-Dravidian languages,dra
-Lower Sorbian,dsb
-Duala,dua
-"Dutch, Middle (ca.1050-1350)",dum
-Dutch; Flemish,nl
-Dyula,dyu
-Dzongkha,dz
-Ewe,ee
-Efik,efi
-Egyptian (Ancient),egy
-Ekajuk,eka
-"Greek, Modern (1453-)",el
-Elamite,elx
-English,en
-"English, Middle (1100-1500)",enm
-Esperanto,eo
-Spanish; Castilian,es
-Estonian,et
-Ewondo,ewo
-Persian,fa
-Fang,fan
-Faroese,fo
-Fanti,fat
-Fulah,ff
-Finnish,fi
-Fijian,fj
-Filipino; Pilipino,fil
-Finno-Ugrian languages,fiu
-Fon,fon
-French,fr
-"French, Middle (ca.1400-1600)",frm
-"French, Old (842-ca.1400)",fro
-Northern Frisian,frr
-Eastern Frisian,frs
-Western Frisian,fy
-Friulian,fur
-Irish,ga
-Ga,gaa
-Gayo,gay
-Gbaya,gba
-Gaelic; Scottish Gaelic,gd
-Germanic languages,gem
-Georgian,ka
-Geez,gez
-Gilbertese,gil
-Galician,gl
-Manx,gv
-"German, Middle High (ca.1050-1500)",gmh
-Guarani,gn
-"German, Old High (ca.750-1050)",goh
-Gondi,gon
-Gorontalo,gor
-Gothic,got
-Grebo,grb
-"Greek, Ancient (to 1453)",grc
-Swiss German; Alemannic; Alsatian,gsw
-Gujarati,gu
-Gwich'in,gwi
-Hausa,ha
-Haida,hai
-Haitian; Haitian Creole,ht
-Hawaiian,haw
-Hebrew,he
-Herero,hz
-Hindi,hi
-Hiligaynon,hil
-Himachali languages; Western Pahari languages,him
-Hittite,hit
-Hmong; Mong,hmn
-Hiri Motu,ho
-Croatian,hr
-Upper Sorbian,hsb
-Hungarian,hu
-Hupa,hup
-Interlingua (International Auxiliary Language Association),ia
-Iban,iba
-Igbo,ig
-Icelandic,is
-Indonesian,id
-Ido,io
-Interlingue; Occidental,ie
-Sichuan Yi; Nuosu,ii
-Ijo languages,ijo
-Inupiaq,ik
-Inuktitut,iu
-Iloko,ilo
-Indic languages,inc
-Indo-European languages,ine
-Ingush,inh
-Iranian languages,ira
-Iroquoian languages,iro
-Italian,it
-Japanese,ja
-Javanese,jv
-Lojban,jbo
-Judeo-Persian,jpr
-Judeo-Arabic,jrb
-Kara-Kalpak,kaa
-Kabyle,kab
-Kachin; Jingpho,kac
-Kalaallisut; Greenlandic,kl
-Kamba,kam
-Kannada,kn
-Karen languages,kar
-Kashmiri,ks
-Kanuri,kr
-Kawi,kaw
-Kazakh,kk
-Kabardian,kbd
-Kongo,kg
-Khasi,kha
-Khoisan languages,khi
-Central Khmer,km
-Khotanese; Sakan,kho
-Kikuyu; Gikuyu,ki
-Kinyarwanda,rw
-Kirghiz; Kyrgyz,ky
-Kuanyama; Kwanyama,kj
-Kimbundu,kmb
-Korean,ko
-Konkani,kok
-Komi,kv
-Kosraean,kos
-Kpelle,kpe
-Karachay-Balkar,krc
-Karelian,krl
-Kru languages,kro
-Kurukh,kru
-Kurdish,ku
-Kumyk,kum
-Kutenai,kut
-Latin,la
-Ladino,lad
-Lahnda,lah
-Lamba,lam
-Lao,lo
-Latvian,lv
-Luxembourgish; Letzeburgesch,lb
-Lezghian,lez
-Ganda,lg
-Limburgan; Limburger; Limburgish,li
-Lingala,ln
-Lithuanian,lt
-Mongo,lol
-Lozi,loz
-Luba-Katanga,lu
-Luba-Lulua,lua
-Luiseno,lui
-Lunda,lun
-Luo (Kenya and Tanzania),luo
-Lushai,lus
-Macedonian,mk
-Madurese,mad
-Magahi,mag
-Marshallese,mh
-Maithili,mai
-Makasar,mak
-Malayalam,ml
-Mandingo,man
-Maori,mi
-Austronesian languages,map
-Marathi,mr
-Masai,mas
-Malay,ms
-Moksha,mdf
-Mandar,mdr
-Mende,men
-Malagasy,mg
-"Irish, Middle (900-1200)",mga
-Mi'kmaq; Micmac,mic
-Minangkabau,min
-Uncoded languages,mis
-Mon-Khmer languages,mkh
-Maltese,mt
-Mongolian,mn
-Manchu,mnc
-Manipuri,mni
-Manobo languages,mno
-Mohawk,moh
-Mossi,mos
-Multiple languages,mul
-Munda languages,mun
-Creek,mus
-Mirandese,mwl
-Marwari,mwr
-Mayan languages,myn
-Erzya,myv
-Nauru,na
-Nahuatl languages,nah
-North American Indian languages,nai
-Neapolitan,nap
-Navajo; Navaho,nv
-"Bokmål, Norwegian; Norwegian Bokmål",nb
-"Ndebele, South; South Ndebele",nr
-"Ndebele, North; North Ndebele",nd
-Ndonga,ng
-"Low German; Low Saxon; German, Low; Saxon, Low",nds
-Nepali,ne
-Nepal Bhasa; Newari,new
-Nias,nia
-Niger-Kordofanian languages,nic
-Niuean,niu
-"Norwegian Nynorsk; Nynorsk, Norwegian",nn
-Norwegian,no
-Nogai,nog
-"Norse, Old",non
-N'Ko,nqo
-Pedi; Sepedi; Northern Sotho,nso
-Nubian languages,nub
-Classical Newari; Old Newari; Classical Nepal Bhasa,nwc
-Chichewa; Chewa; Nyanja,ny
-Nyamwezi,nym
-Nyankole,nyn
-Nyoro,nyo
-Nzima,nzi
-Occitan (post 1500),oc
-Ojibwa,oj
-Oromo,om
-Oriya,or
-Ossetian; Ossetic,os
-Osage,osa
-"Turkish, Ottoman (1500-1928)",ota
-Otomian languages,oto
-Panjabi; Punjabi,pa
-Papuan languages,paa
-Pangasinan,pag
-Pahlavi,pal
-Pampanga; Kapampangan,pam
-Papiamento,pap
-Palauan,pau
-"Persian, Old (ca.600-400 B.C.)",peo
-Philippine languages,phi
-Phoenician,phn
-Pali,pi
-Polish,pl
-Pohnpeian,pon
-Portuguese,pt
-Prakrit languages,pra
-"Provençal, Old (to 1500);Occitan, Old (to 1500)",pro
-Pushto; Pashto,ps
-Reserved for local use,qaa-qtz
-Quechua,qu
-Rajasthani,raj
-Rapanui,rap
-Rarotongan; Cook Islands Maori,rar
-Romansh,rm
-Rundi,rn
-Romanian; Moldavian; Moldovan,ro
-Romance languages,roa
-Romany,rom
-Russian,ru
-Aromanian; Arumanian; Macedo-Romanian,rup
-Sanskrit,sa
-Sandawe,sad
-Sango,sg
-Yakut,sah
-South American Indian languages,sai
-Salishan languages,sal
-Samaritan Aramaic,sam
-Sasak,sas
-Santali,sat
-Sardinian,sc
-Sicilian,scn
-Scots,sco
-Sindhi,sd
-Northern Sami,se
-Selkup,sel
-Semitic languages,sem
-"Irish, Old (to 900)",sga
-Sign Languages,sgn
-Shan,shn
-Sinhala; Sinhalese,si
-Sidamo,sid
-Siouan languages,sio
-Sino-Tibetan languages,sit
-Slovak,sk
-Slovenian,sl
-Slavic languages,sla
-Samoan,sm
-Southern Sami,sma
-Sami languages,smi
-Lule Sami,smj
-Inari Sami,smn
-Skolt Sami,sms
-Shona,sn
-Soninke,snk
-Somali,so
-Sogdian,sog
-Songhai languages,son
-"Sotho, Southern",st
-Serbian,sr
-Sranan Tongo,srn
-Serer,srr
-Swati,ss
-Nilo-Saharan languages,ssa
-Sundanese,su
-Sukuma,suk
-Susu,sus
-Sumerian,sux
-Swedish,sv
-Swahili,sw
-Classical Syriac,syc
-Syriac,syr
-Tamil,ta
-Tahitian,ty
-Tai languages,tai
-Tatar,tt
-Telugu,te
-Timne,tem
-Tereno,ter
-Tetum,tet
-Tajik,tg
-Tagalog,tl
-Thai,th
-Tigrinya,ti
-Tigre,tig
-Tiv,tiv
-Turkmen,tk
-Tokelau,tkl
-Klingon; tlhIngan-Hol,tlh
-Tlingit,tli
-Tamashek,tmh
-Tswana,tn
-Tonga (Tonga Islands),to
-Tonga (Nyasa),tog
-Tok Pisin,tpi
-Turkish,tr
-Tsonga,ts
-Tsimshian,tsi
-Tumbuka,tum
-Tupi languages,tup
-Altaic languages,tut
-Tuvalu,tvl
-Twi,tw
-Tuvinian,tyv
-Udmurt,udm
-Uighur; Uyghur,ug
-Ugaritic,uga
-Ukrainian,uk
-Umbundu,umb
-Undetermined,und
-Urdu,ur
-Uzbek,uz
-Vai,vai
-Venda,ve
-Vietnamese,vi
-Volapük,vo
-Votic,vot
-Walloon,wa
-Wakashan languages,wak
-Wolaitta; Wolaytta,wal
-Waray,war
-Washo,was
-Sorbian languages,wen
-Wolof,wo
-Kalmyk; Oirat,xal
-Xhosa,xh
-Yao,yao
-Yapese,yap
-Yiddish,yi
-Yoruba,yo
-Yupik languages,ypk
-Zhuang; Chuang,za
-Zapotec,zap
-Blissymbols; Blissymbolics; Bliss,zbl
-Zenaga,zen
-Standard Moroccan Tamazight,zgh
-Zande languages,znd
-Zulu,zu
-Zuni,zun
-No linguistic content; Not applicable,zxx
-Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki,zza
+"Code","Name"
+"aa","Afar"
+"ab","Abkhazian"
+"ace","Achinese"
+"ach","Acoli"
+"ada","Adangme"
+"ady","Adyghe; Adygei"
+"ae","Avestan"
+"af","Afrikaans"
+"afa","Afro-Asiatic languages"
+"afh","Afrihili"
+"ain","Ainu"
+"ak","Akan"
+"akk","Akkadian"
+"sq","Albanian"
+"ale","Aleut"
+"alg","Algonquian languages"
+"alt","Southern Altai"
+"am","Amharic"
+"an","Aragonese"
+"ang","English, Old (ca.450-1100)"
+"anp","Angika"
+"apa","Apache languages"
+"ar","Arabic"
+"arc","Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)"
+"hy","Armenian"
+"arn","Mapudungun; Mapuche"
+"arp","Arapaho"
+"art","Artificial languages"
+"arw","Arawak"
+"as","Assamese"
+"ast","Asturian; Bable; Leonese; Asturleonese"
+"ath","Athapascan languages"
+"aus","Australian languages"
+"av","Avaric"
+"awa","Awadhi"
+"ay","Aymara"
+"az","Azerbaijani"
+"ba","Bashkir"
+"bad","Banda languages"
+"bai","Bamileke languages"
+"bal","Baluchi"
+"bm","Bambara"
+"ban","Balinese"
+"eu","Basque"
+"bas","Basa"
+"bat","Baltic languages"
+"be","Belarusian"
+"bej","Beja; Bedawiyet"
+"bem","Bemba"
+"bn","Bengali"
+"ber","Berber languages"
+"bg","Bulgarian"
+"bh","Bihari languages"
+"bho","Bhojpuri"
+"bi","Bislama"
+"bik","Bikol"
+"bin","Bini; Edo"
+"bla","Siksika"
+"bnt","Bantu languages"
+"bo","Tibetan"
+"bs","Bosnian"
+"br","Breton"
+"bra","Braj"
+"btk","Batak languages"
+"bua","Buriat"
+"bug","Buginese"
+"my","Burmese"
+"byn","Blin; Bilin"
+"ca","Catalan; Valencian"
+"cad","Caddo"
+"cai","Central American Indian languages"
+"car","Galibi Carib"
+"cau","Caucasian languages"
+"ce","Chechen"
+"ceb","Cebuano"
+"cel","Celtic languages"
+"ch","Chamorro"
+"chb","Chibcha"
+"chg","Chagatai"
+"zh","Chinese"
+"chk","Chuukese"
+"chm","Mari"
+"chn","Chinook jargon"
+"cho","Choctaw"
+"chp","Chipewyan; Dene Suline"
+"chr","Cherokee"
+"cu","Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic"
+"cv","Chuvash"
+"chy","Cheyenne"
+"cmc","Chamic languages"
+"cnr","Montenegrin"
+"co","Corsican"
+"cop","Coptic"
+"kw","Cornish"
+"cpe","Creoles and pidgins, English based"
+"cpf","Creoles and pidgins, French-based"
+"cpp","Creoles and pidgins, Portuguese-based"
+"cr","Cree"
+"crh","Crimean Tatar; Crimean Turkish"
+"crp","Creoles and pidgins"
+"cs","Czech"
+"csb","Kashubian"
+"cus","Cushitic languages"
+"cy","Welsh"
+"da","Danish"
+"dak","Dakota"
+"dar","Dargwa"
+"day","Land Dayak languages"
+"de","German"
+"del","Delaware"
+"den","Slave (Athapascan)"
+"dgr","Dogrib"
+"din","Dinka"
+"dv","Divehi; Dhivehi; Maldivian"
+"doi","Dogri"
+"dra","Dravidian languages"
+"dsb","Lower Sorbian"
+"dua","Duala"
+"dum","Dutch, Middle (ca.1050-1350)"
+"nl","Dutch; Flemish"
+"dyu","Dyula"
+"dz","Dzongkha"
+"ee","Ewe"
+"efi","Efik"
+"egy","Egyptian (Ancient)"
+"eka","Ekajuk"
+"el","Greek, Modern (1453-)"
+"elx","Elamite"
+"en","English"
+"enm","English, Middle (1100-1500)"
+"eo","Esperanto"
+"es","Spanish; Castilian"
+"et","Estonian"
+"ewo","Ewondo"
+"fa","Persian"
+"fan","Fang"
+"fo","Faroese"
+"fat","Fanti"
+"ff","Fulah"
+"fi","Finnish"
+"fj","Fijian"
+"fil","Filipino; Pilipino"
+"fiu","Finno-Ugrian languages"
+"fon","Fon"
+"fr","French"
+"frm","French, Middle (ca.1400-1600)"
+"fro","French, Old (842-ca.1400)"
+"frr","Northern Frisian"
+"frs","Eastern Frisian"
+"fy","Western Frisian"
+"fur","Friulian"
+"ga","Irish"
+"gaa","Ga"
+"gay","Gayo"
+"gba","Gbaya"
+"gd","Gaelic; Scottish Gaelic"
+"gem","Germanic languages"
+"ka","Georgian"
+"gez","Geez"
+"gil","Gilbertese"
+"gl","Galician"
+"gv","Manx"
+"gmh","German, Middle High (ca.1050-1500)"
+"gn","Guarani"
+"goh","German, Old High (ca.750-1050)"
+"gon","Gondi"
+"gor","Gorontalo"
+"got","Gothic"
+"grb","Grebo"
+"grc","Greek, Ancient (to 1453)"
+"gsw","Swiss German; Alemannic; Alsatian"
+"gu","Gujarati"
+"gwi","Gwich'in"
+"ha","Hausa"
+"hai","Haida"
+"ht","Haitian; Haitian Creole"
+"haw","Hawaiian"
+"he","Hebrew"
+"hz","Herero"
+"hi","Hindi"
+"hil","Hiligaynon"
+"him","Himachali languages; Western Pahari languages"
+"hit","Hittite"
+"hmn","Hmong; Mong"
+"ho","Hiri Motu"
+"hr","Croatian"
+"hsb","Upper Sorbian"
+"hu","Hungarian"
+"hup","Hupa"
+"ia","Interlingua (International Auxiliary Language Association)"
+"iba","Iban"
+"ig","Igbo"
+"is","Icelandic"
+"id","Indonesian"
+"io","Ido"
+"ie","Interlingue; Occidental"
+"ii","Sichuan Yi; Nuosu"
+"ijo","Ijo languages"
+"ik","Inupiaq"
+"iu","Inuktitut"
+"ilo","Iloko"
+"inc","Indic languages"
+"ine","Indo-European languages"
+"inh","Ingush"
+"ira","Iranian languages"
+"iro","Iroquoian languages"
+"it","Italian"
+"ja","Japanese"
+"jv","Javanese"
+"jbo","Lojban"
+"jpr","Judeo-Persian"
+"jrb","Judeo-Arabic"
+"kaa","Kara-Kalpak"
+"kab","Kabyle"
+"kac","Kachin; Jingpho"
+"kl","Kalaallisut; Greenlandic"
+"kam","Kamba"
+"kn","Kannada"
+"kar","Karen languages"
+"ks","Kashmiri"
+"kr","Kanuri"
+"kaw","Kawi"
+"kk","Kazakh"
+"kbd","Kabardian"
+"kg","Kongo"
+"kha","Khasi"
+"khi","Khoisan languages"
+"km","Central Khmer"
+"kho","Khotanese; Sakan"
+"ki","Kikuyu; Gikuyu"
+"rw","Kinyarwanda"
+"ky","Kirghiz; Kyrgyz"
+"kj","Kuanyama; Kwanyama"
+"kmb","Kimbundu"
+"ko","Korean"
+"kok","Konkani"
+"kv","Komi"
+"kos","Kosraean"
+"kpe","Kpelle"
+"krc","Karachay-Balkar"
+"krl","Karelian"
+"kro","Kru languages"
+"kru","Kurukh"
+"ku","Kurdish"
+"kum","Kumyk"
+"kut","Kutenai"
+"la","Latin"
+"lad","Ladino"
+"lah","Lahnda"
+"lam","Lamba"
+"lo","Lao"
+"lv","Latvian"
+"lb","Luxembourgish; Letzeburgesch"
+"lez","Lezghian"
+"lg","Ganda"
+"li","Limburgan; Limburger; Limburgish"
+"ln","Lingala"
+"lt","Lithuanian"
+"lol","Mongo"
+"loz","Lozi"
+"lu","Luba-Katanga"
+"lua","Luba-Lulua"
+"lui","Luiseno"
+"lun","Lunda"
+"luo","Luo (Kenya and Tanzania)"
+"lus","Lushai"
+"mk","Macedonian"
+"mad","Madurese"
+"mag","Magahi"
+"mh","Marshallese"
+"mai","Maithili"
+"mak","Makasar"
+"ml","Malayalam"
+"man","Mandingo"
+"mi","Maori"
+"map","Austronesian languages"
+"mr","Marathi"
+"mas","Masai"
+"ms","Malay"
+"mdf","Moksha"
+"mdr","Mandar"
+"men","Mende"
+"mg","Malagasy"
+"mga","Irish, Middle (900-1200)"
+"mic","Mi'kmaq; Micmac"
+"min","Minangkabau"
+"mis","Uncoded languages"
+"mkh","Mon-Khmer languages"
+"mt","Maltese"
+"mn","Mongolian"
+"mnc","Manchu"
+"mni","Manipuri"
+"mno","Manobo languages"
+"moh","Mohawk"
+"mos","Mossi"
+"mul","Multiple languages"
+"mun","Munda languages"
+"mus","Creek"
+"mwl","Mirandese"
+"mwr","Marwari"
+"myn","Mayan languages"
+"myv","Erzya"
+"na","Nauru"
+"nah","Nahuatl languages"
+"nai","North American Indian languages"
+"nap","Neapolitan"
+"nv","Navajo; Navaho"
+"nb","Bokmål, Norwegian; Norwegian Bokmål"
+"nr","Ndebele, South; South Ndebele"
+"nd","Ndebele, North; North Ndebele"
+"ng","Ndonga"
+"nds","Low German; Low Saxon; German, Low; Saxon, Low"
+"ne","Nepali"
+"new","Nepal Bhasa; Newari"
+"nia","Nias"
+"nic","Niger-Kordofanian languages"
+"niu","Niuean"
+"nn","Norwegian Nynorsk; Nynorsk, Norwegian"
+"no","Norwegian"
+"nog","Nogai"
+"non","Norse, Old"
+"nqo","N'Ko"
+"nso","Pedi; Sepedi; Northern Sotho"
+"nub","Nubian languages"
+"nwc","Classical Newari; Old Newari; Classical Nepal Bhasa"
+"ny","Chichewa; Chewa; Nyanja"
+"nym","Nyamwezi"
+"nyn","Nyankole"
+"nyo","Nyoro"
+"nzi","Nzima"
+"oc","Occitan (post 1500)"
+"oj","Ojibwa"
+"om","Oromo"
+"or","Oriya"
+"os","Ossetian; Ossetic"
+"osa","Osage"
+"ota","Turkish, Ottoman (1500-1928)"
+"oto","Otomian languages"
+"pa","Panjabi; Punjabi"
+"paa","Papuan languages"
+"pag","Pangasinan"
+"pal","Pahlavi"
+"pam","Pampanga; Kapampangan"
+"pap","Papiamento"
+"pau","Palauan"
+"peo","Persian, Old (ca.600-400 B.C.)"
+"phi","Philippine languages"
+"phn","Phoenician"
+"pi","Pali"
+"pl","Polish"
+"pon","Pohnpeian"
+"pt","Portuguese"
+"pra","Prakrit languages"
+"pro","Provençal, Old (to 1500);Occitan, Old (to 1500)"
+"ps","Pushto; Pashto"
+"qaa-qtz","Reserved for local use"
+"qu","Quechua"
+"raj","Rajasthani"
+"rap","Rapanui"
+"rar","Rarotongan; Cook Islands Maori"
+"rm","Romansh"
+"rn","Rundi"
+"ro","Romanian; Moldavian; Moldovan"
+"roa","Romance languages"
+"rom","Romany"
+"ru","Russian"
+"rup","Aromanian; Arumanian; Macedo-Romanian"
+"sa","Sanskrit"
+"sad","Sandawe"
+"sg","Sango"
+"sah","Yakut"
+"sai","South American Indian languages"
+"sal","Salishan languages"
+"sam","Samaritan Aramaic"
+"sas","Sasak"
+"sat","Santali"
+"sc","Sardinian"
+"scn","Sicilian"
+"sco","Scots"
+"sd","Sindhi"
+"se","Northern Sami"
+"sel","Selkup"
+"sem","Semitic languages"
+"sga","Irish, Old (to 900)"
+"sgn","Sign Languages"
+"shn","Shan"
+"si","Sinhala; Sinhalese"
+"sid","Sidamo"
+"sio","Siouan languages"
+"sit","Sino-Tibetan languages"
+"sk","Slovak"
+"sl","Slovenian"
+"sla","Slavic languages"
+"sm","Samoan"
+"sma","Southern Sami"
+"smi","Sami languages"
+"smj","Lule Sami"
+"smn","Inari Sami"
+"sms","Skolt Sami"
+"sn","Shona"
+"snk","Soninke"
+"so","Somali"
+"sog","Sogdian"
+"son","Songhai languages"
+"st","Sotho, Southern"
+"sr","Serbian"
+"srn","Sranan Tongo"
+"srr","Serer"
+"ss","Swati"
+"ssa","Nilo-Saharan languages"
+"su","Sundanese"
+"suk","Sukuma"
+"sus","Susu"
+"sux","Sumerian"
+"sv","Swedish"
+"sw","Swahili"
+"syc","Classical Syriac"
+"syr","Syriac"
+"ta","Tamil"
+"ty","Tahitian"
+"tai","Tai languages"
+"tt","Tatar"
+"te","Telugu"
+"tem","Timne"
+"ter","Tereno"
+"tet","Tetum"
+"tg","Tajik"
+"tl","Tagalog"
+"th","Thai"
+"ti","Tigrinya"
+"tig","Tigre"
+"tiv","Tiv"
+"tk","Turkmen"
+"tkl","Tokelau"
+"tlh","Klingon; tlhIngan-Hol"
+"tli","Tlingit"
+"tmh","Tamashek"
+"tn","Tswana"
+"to","Tonga (Tonga Islands)"
+"tog","Tonga (Nyasa)"
+"tpi","Tok Pisin"
+"tr","Turkish"
+"ts","Tsonga"
+"tsi","Tsimshian"
+"tum","Tumbuka"
+"tup","Tupi languages"
+"tut","Altaic languages"
+"tvl","Tuvalu"
+"tw","Twi"
+"tyv","Tuvinian"
+"udm","Udmurt"
+"ug","Uighur; Uyghur"
+"uga","Ugaritic"
+"uk","Ukrainian"
+"umb","Umbundu"
+"und","Undetermined"
+"ur","Urdu"
+"uz","Uzbek"
+"vai","Vai"
+"ve","Venda"
+"vi","Vietnamese"
+"vo","Volapük"
+"vot","Votic"
+"wa","Walloon"
+"wak","Wakashan languages"
+"wal","Wolaitta; Wolaytta"
+"war","Waray"
+"was","Washo"
+"wen","Sorbian languages"
+"wo","Wolof"
+"xal","Kalmyk; Oirat"
+"xh","Xhosa"
+"yao","Yao"
+"yap","Yapese"
+"yi","Yiddish"
+"yo","Yoruba"
+"ypk","Yupik languages"
+"za","Zhuang; Chuang"
+"zap","Zapotec"
+"zbl","Blissymbols; Blissymbolics; Bliss"
+"zen","Zenaga"
+"zgh","Standard Moroccan Tamazight"
+"znd","Zande languages"
+"zu","Zulu"
+"zun","Zuni"
+"zxx","No linguistic content; Not applicable"
+"zza","Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"

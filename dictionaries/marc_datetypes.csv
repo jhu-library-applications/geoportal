@@ -1,6 +1,8 @@
 Type,Name
 b,No dates given; B.C. date involved
+c,Continuing resource currently published
 e,Detailed date
+d,Continuing resource ceased publication
 i,Inclusive date
 k,Range of dates
 m,Initial/terminal date
@@ -10,3 +12,4 @@ q,Questionable date
 r,Reprint/original date
 s,Single date
 t,Publication date and copyright date
+u,Continuing resource status unknown
