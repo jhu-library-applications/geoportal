@@ -110,18 +110,18 @@ else:
 fastresults = explodeHeadingsByIndex(fastresults)
 lcnafresults = explodeHeadingsByIndex(lcnafresults)
 
-# Merge results from FAST and LCNAF into one new column 'spatial_coverage.'
-# Remove duplicate result from spatial_coverage.
+# Merge results from FAST and LCNAF into one new column 'spatial.'
+# Remove duplicate result from spatial.
 frame = pd.merge(fastresults, lcnafresults, on='oindex', suffixes=('_1', '_2'))
 print(frame.head)
-frame['spatial_coverage'] = frame['fullName_1']+'|'+frame['fullName_2']
-frame.spatial_coverage = frame.spatial_coverage.str.split('|')
-frame.spatial_coverage = frame.apply(lambda row:
-                                     set(row['spatial_coverage']), axis=1)
-frame.spatial_coverage = frame.spatial_coverage.str.join('|')
+frame['spatial'] = frame['fullName_1']+'|'+frame['fullName_2']
+frame.spatial = frame.spatial.str.split('|')
+frame.spatial = frame.apply(lambda row:
+                            set(row['spatial']), axis=1)
+frame.spatial = frame.spatial.str.join('|')
 frame = frame.drop(columns=['fullName_1', 'fullName_2'])
 
-# Merge 'spatial_coverage' column into marc spreadsheet.
+# Merge 'spatial' column into marc spreadsheet.
 frame.oindex = frame.oindex.astype('int64')
 print(frame.head)
 updated = pd.merge(df, frame, left_index=True, right_on='oindex')

@@ -1,5 +1,5 @@
 import requests
-from rdflib import Namespace, Graph, URIRef, Literal, RDFS
+from rdflib import Namespace, Graph, URIRef, RDFS
 from bs4 import BeautifulSoup as Soup
 
 # Convert geographic names from LCNAF to geonames identifiers.

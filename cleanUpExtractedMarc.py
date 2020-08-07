@@ -34,8 +34,15 @@ def addDictonary(columnName, vocab):
         else:
             terms = [term]
         for x in terms:
-            vocabDict = {'vocab': vocab, 'term': x,
+            if "http://id.loc.gov/authorities/names/" in x:
+                termURI = x.rsplit(' ', 1)
+                uri = termURI[-1].strip()
+                x = termURI[0].strip()
+            else:
+                uri = 'None'
+            vocabDict = {'vocab': vocab, 'term': x, 'uri': uri,
                          'field': columnName, 'oindex': index}
+            print(vocabDict)
             searchList.append(vocabDict)
 
 
@@ -65,13 +72,12 @@ if verify == 'yes':
     df_2 = pd.DataFrame.from_dict(searchList)
     df_2.term = df_2['term'].str.strip()
     df_2.term = df_2['term'].str.rstrip(',')
-    # Drop null values before attempting validation.
-    df_2.dropna(axis=0, inplace=True)
     # Group/condense matching headings together in order to perform fewer searches.
     # Create column 'oindex' to keep track of original index of headings.
-    pivoted = pd.pivot_table(df_2, index=['term', 'vocab', 'field'],
+    pivoted = pd.pivot_table(df_2, index=['term', 'vocab', 'field', 'uri'],
                              values='oindex',
                              aggfunc=lambda x: '|'.join(str(v) for v in x))
+    print(pivoted.head)
     pivoted.reset_index(inplace=True)
     # Convert dataframe back to dictionary.
     updatedList = pd.DataFrame.to_dict(pivoted, orient='records')

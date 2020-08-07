@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as Soup
 from rdflib import Namespace, Graph, URIRef
+from fuzzywuzzy import fuzz
 
 
 # Configuration for requests.
@@ -28,37 +29,52 @@ def getGraph(url, format):
     return graph
 
 
+def findTermFromLabel(searchTerm, type):
+    newURL = None
+    url = baseURL+type+'/label/'+searchTerm
+    try:
+        data = lc.get(url, timeout=30, headers=headers)
+        foundName = data.ok
+        newURL = data.url
+        if foundName:
+            newURL = data.url
+            if newURL:
+                newURL = newURL.replace('.html', '')
+                return newURL
+    except requests.Timeout:
+        pass
+
+
+def getInfoFromGraph(graph, item, searchTerm, type):
+    if graph:
+        for result in graph.subject_objects((mads.authoritativeLabel)):
+            if auth+type in result[0]:
+                ratio = fuzz.ratio(result[1].value, searchTerm)
+                if ratio > 95:
+                    print('Heading validated')
+                    item['authURI'] = result[0].toPython()
+                    item['authLabel'] = result[1].value
+
+
 def verifyHeadingList(searchList):
     all_items = []
     for item in searchList:
-        print(item)
-        vocab = item.get('vocab')
         searchTerm = item.get('term')
-        print(vocab)
-        print(searchTerm)
         if searchTerm:
-            searchTerm.rstrip('.')
+            vocab = item.get('vocab')
             type = authorities.get(vocab)
+            print(vocab)
+            print(searchTerm)
             if vocab != 'fast':
-                url = baseURL+type+'/label/'+searchTerm
-                try:
-                    data = lc.get(url, timeout=30, headers=headers)
-                    foundName = data.ok
-                    newURL = data.url
-                    if foundName:
-                        newURL = data.url
-                        newURL = newURL.replace('.html', '')
-                        print(newURL)
+                if item.get('uri') != 'None':
+                    newURL = item.get('uri')
+                    graph = getGraph(newURL+'.nt', 'nt')
+                    getInfoFromGraph(graph, item, searchTerm, type)
+                else:
+                    newURL = findTermFromLabel(searchTerm, type)
+                    if newURL:
                         graph = getGraph(newURL+'.nt', 'nt')
-                        if graph:
-                            for result in graph.subject_objects((mads.authoritativeLabel)):
-                                if auth+type in result[0]:
-                                    if result[1].value == searchTerm:
-                                        print('Heading validated')
-                                        item['authURI'] = result[0]
-                                        item['authLabel'] = result[1].value
-                except requests.Timeout:
-                    pass
+                        getInfoFromGraph(graph, item, searchTerm, type)
             else:
                 data = ft.get(fastURL+searchTerm+fastPara)
                 data = data.content
@@ -69,10 +85,11 @@ def verifyHeadingList(searchList):
                     identifier = identifier.string
                     authLabel = record.find('skos:preflabel')
                     authLabel = authLabel.string
-                    print(authLabel)
                     if authLabel == searchTerm:
                         print('Heading validated')
                         item['authLabel'] = authLabel
                         item['authURI'] = identifier
+        del item['uri']
+        print(item)
         all_items.append(item)
     return all_items
