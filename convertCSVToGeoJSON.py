@@ -3,16 +3,26 @@ import json
 import argparse
 from jsonschema import validate
 from datetime import datetime
-
+import uuid
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
+parser.add_argument('-p', '--prov')
+parser.add_argument('-b', '--baseURL')
 args = parser.parse_args()
 
 if args.file:
     filename = args.file
 else:
     filename = input('Enter filename (including \'.csv\'): ')
+if args.prov:
+    prov = args.prov
+else:
+    prov = input('Enter provenance information: ')
+if args.baseURL:
+    baseURL = args.baseURL
+else:
+    baseURL = input('Enter the baseURL of your GeoBlacklight instance: ')
 
 
 def fixGeom(json_file, key, value):
@@ -83,6 +93,15 @@ def addListToDict(json_file, key, value):
         pass
 
 
+def addIdentifierAndSlug:
+    id = row.get('identifier')
+    if id is None:
+        id = uuid.uuid4()
+        slug = baseURL+id
+        json_file['dc_identifier_s'] = id
+        json_file['layer_slug_s'] = slug
+
+
 with open(filename) as geoMetadata:
     geoMetadata = csv.DictReader(geoMetadata)
     for row in geoMetadata:
@@ -90,7 +109,7 @@ with open(filename) as geoMetadata:
         identifier = row['identifier']
         hierarchy = row['hierarchy']
         json_file['dc_identifier_s'] = identifier
-        addToDict(json_file, 'dc_rights_s', 'rights')
+        addToDict('dc_rights_s', 'rights')
         addToDict(json_file, 'dc_title_s', 'title')
         addToDict(json_file, 'layer_slug_s', 'layer_slug')
         fixGeom(json_file, 'solr_geom', 'bounding_box')
@@ -112,11 +131,10 @@ with open(filename) as geoMetadata:
         addToDict(json_file, 'layer_id_s', 'layer_id')
         addToDict(json_file, 'layer_modified_dt', 'layer_modified')
         addToDict(json_file, 'suppressed_b', 'suppressed')
-        json_file['dct_provenance_s'] = 'Johns_Hopkins'
+        json_file['dct_provenance_s'] = prov
         json_file['geoblacklight_version'] = '1.0'
         dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
-        filename = identifier.replace('http://hopkinsgeoportal/', '')
-        c_filename = filename+'_'+hierarchy+'_'+dt+'.json'
+        c_filename = identifier+'_'+hierarchy+'_'+dt+'.json'
         with open(c_filename, 'w') as fp:
             json.dump(json_file, fp)
 
