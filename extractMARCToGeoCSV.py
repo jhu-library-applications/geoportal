@@ -84,7 +84,7 @@ def convert_to_name(keyname, dictname):
             if v == key:
                 mrc_fields[keyname] = value
 
-
+# Finds geographic subject headings from 600 fields.
 def geo_finder(field_name, subfields, tags):
     field_list = []
     field = record.get_fields(*tags)
@@ -101,6 +101,27 @@ def geo_finder(field_name, subfields, tags):
         mrc_fields[field_name] = field_list
     else:
         mrc_fields[field_name] = ''
+
+
+def makeBoundingBox():
+    box = []
+    coor_list = ['west', 'south', 'east', 'north']
+    if mrc_fields.get('north'):
+        for item in coor_list:
+            direction = mrc_fields.get(item)
+            if "|" in direction:
+                direction = direction.split('|')
+                direction = direction[0]
+            else:
+                direction = direction
+            direction = direction.replace('+', '')
+            box.append(direction)
+        box = ', '.join(box)
+        mrc_fields['bounding_box'] = box
+    else:
+        mrc_fields['bounding_box'] = ''
+    for item in coor_list:
+        del mrc_fields[item]
 
 
 all_fields = []
@@ -127,7 +148,10 @@ with open(filename, 'rb') as fh:
         subfield_finder('spatial_lcnaf', tags=['651'], subfields=['a', 'z'])
         field_finder('description', tags=['500', '520'])
         subfield_finder('language', subfields=['a', 'b', 'c', 'd', 'f'], tags=['041'])
-        subfield_finder('bounding_box', subfields=['d', 'e', 'f', 'g'], tags=['034'])
+        subfield_finder('west', subfields=['d'], tags=['034'])
+        subfield_finder('east', subfields=['e'], tags=['034'])
+        subfield_finder('north', subfields=['f'], tags=['034'])
+        subfield_finder('south', subfields=['g'], tags=['034'])
         subfield_finder('temporal', subfields=['x', 'y'], tags=['034'])
         subfield_finder('scale', subfields=['a'], tags=['255'])
         catValue = mrc_fields.get('category')
@@ -177,6 +201,7 @@ with open(filename, 'rb') as fh:
         else:
             pass
         del mrc_fields['lang']
+        makeBoundingBox()
 
         # Adds dict created by this MARC record to all_fields list.
         all_fields.append(mrc_fields)

@@ -32,6 +32,7 @@ if verify == 'no':
         lcnaf = input('Enter name of lcnaf result csv')
 
 df = pd.read_csv(filename)
+print(df.head)
 fastList = []
 lcnafList = []
 
@@ -95,36 +96,57 @@ if verify == 'yes':
 
     fastList = condenseHeadings(fastList)
     lcnafList = condenseHeadings(lcnafList)
-    lcnafresults = geo.convertLCNAFToGeoNames(lcnafList, 'yes')
-    fastresults = geo.convertFASTToGeoNames(fastList, 'yes')
 
-    fastresults = pd.DataFrame.from_dict(fastresults)
-    lcnafresults = pd.DataFrame.from_dict(lcnafresults)
-    lcnafresults.to_csv('lcnaf_'+filename, index=False)
-    fastresults.to_csv('fast_'+filename, index=False)
+    lcnafresults = geo.convertLCNAFToGeoNames(lcnafList, 'yes')
+    df_lcnaf = pd.DataFrame.from_dict(lcnafresults)
+    df_lcnaf.to_csv('lcnaf_'+filename, index=False)
+
+    fastresults = geo.convertFASTToGeoNames(fastList, 'yes')
+    df_fast = pd.DataFrame.from_dict(fastresults)
+    df_fast.to_csv('fast_'+filename, index=False)
 # Use pre-existing spreadsheet with headings converted to GeoNames.
 else:
-    fastresults = pd.read_csv(fastresults)
-    lcnafresults = pd.read_csv(lcnafresults)
+    df_fast = pd.read_csv(fastresults)
+    df_lcnaf = pd.read_csv(lcnafresults)
 
-fastresults = explodeHeadingsByIndex(fastresults)
-lcnafresults = explodeHeadingsByIndex(lcnafresults)
+ex_fast = explodeHeadingsByIndex(df_fast)
+ex_lcnaf = explodeHeadingsByIndex(df_lcnaf)
 
 # Merge results from FAST and LCNAF into one new column 'spatial.'
 # Remove duplicate result from spatial.
-frame = pd.merge(fastresults, lcnafresults, on='oindex', suffixes=('_1', '_2'))
+frame = pd.merge(ex_fast, ex_lcnaf, how='outer', on='oindex', suffixes=('_1', '_2'))
 print(frame.head)
-frame['spatial'] = frame['fullName_1']+'|'+frame['fullName_2']
-frame.spatial = frame.spatial.str.split('|')
-frame.spatial = frame.apply(lambda row:
-                            set(row['spatial']), axis=1)
-frame.spatial = frame.spatial.str.join('|')
-frame = frame.drop(columns=['fullName_1', 'fullName_2'])
+spatiallist = []
+for index, data in frame.iterrows():
+    little = []
+    geo1 = data['fullName_1']
+    if pd.isna(geo1):
+        pass
+    else:
+        geo1 = geo1.split('|')
+        for item in geo1:
+            if item not in little:
+                little.append(item)
+    geo2 = data['fullName_2']
+    if pd.isna(geo2):
+        pass
+    else:
+        geo2 = geo2.split('|')
+        for item in geo2:
+            if item not in little:
+                little.append(item)
+    little = '|'.join(little)
+    littledict = {'index': index, 'spatial': little}
+    spatiallist.append(littledict)
+
+spatial = pd.DataFrame.from_dict(spatiallist)
+
+frame = pd.merge(frame, spatial, left_index=True, right_index=True)
+
 
 # Merge 'spatial' column into marc spreadsheet.
 frame.oindex = frame.oindex.astype('int64')
-print(frame.head)
-updated = pd.merge(df, frame, left_index=True, right_on='oindex')
+updated = pd.merge(df, frame, how='left', left_index=True, right_on='oindex')
 updated = updated.drop(columns=['oindex', 'spatial_fast', 'spatial_lcnaf'])
 
 # Create updated marc spreadsheet.

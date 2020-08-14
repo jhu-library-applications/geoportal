@@ -113,6 +113,7 @@ def getParents(parents, result):
 
 
 def convertLCNAFToGeoNames(searchTerms, parents):
+    all_items.clear()
     for count, result in enumerate(searchTerms):
         # Get results from FAST API
         result = result
@@ -126,43 +127,38 @@ def convertLCNAFToGeoNames(searchTerms, parents):
         if foundName:
             newURL = data.url
             newURL = newURL.replace('.html', '')
-            print(newURL)
             graph = getGraph(newURL+'.nt', 'nt', 'lc')
-            if graph is None:
-                continue
-            for s, p, o in graph.triples((None, mads.hasCloseExternalAuthority, None)):
-                if 'http://id.worldcat.org/fast/' in o:
-                    if result.get('geoname0') is None:
-                        # Get linked data of FAST results
-                        fastId = o
-                        fLink = fastId+ext
-                        print(fLink)
-                        graph = getGraph(fLink, 'xml', 'ft')
-                        if graph is None:
-                            continue
-                        nameAuth = URIRef(newURL)
-                        if (None, schema.sameAs, nameAuth) in graph:
-                            objects = graph.objects(subject=None, predicate=schema.sameAs)
-                            for object in objects:
-                                print(object)
-                                if 'http://www.geonames.org/' in object:
-                                    print('hooray')
-                                    label = graph.value(subject=object, predicate=RDFS.label)
-                                    result['geoname0'] = object
-                                    result['name0'] = label
-                                    print(object, label)
-                                else:
-                                    pass
-                        else:
-                            pass
+            if graph:
+                for s, p, o in graph.triples((None,
+                                              mads.hasCloseExternalAuthority,
+                                              None)):
+                    if 'http://id.worldcat.org/fast/' in o:
+                        if result.get('geoname0') is None:
+                            # Get linked data of FAST results
+                            fastId = o
+                            fLink = fastId+ext
+                            graph = getGraph(fLink, 'xml', 'ft')
+                            if graph:
+                                nameAuth = newURL.replace('https', 'http')
+                                nameAuth = URIRef(nameAuth)
+                                if (None, schema.sameAs, nameAuth) in graph:
+                                    objects = graph.objects(subject=None, predicate=schema.sameAs)
+                                    for object in objects:
+                                        if 'http://www.geonames.org/' in object:
+                                            print('hooray')
+                                            label = graph.value(subject=object, predicate=RDFS.label)
+                                            result['geoname0'] = object
+                                            result['name0'] = label
+                                            print(object, label)
+                                        else:
+                                            pass
         # Get parent info from geonames
         getParents(parents, result)
-
     return all_items
-    all_items.clear()
 
 
 def convertFASTToGeoNames(searchTerms, parents):
+    all_items.clear()
     for count, result in enumerate(searchTerms):
         # Get results from FAST API
         result = result
@@ -189,6 +185,4 @@ def convertFASTToGeoNames(searchTerms, parents):
 
         # Get parent info from geonames
         getParents(parents, result)
-
     return all_items
-    all_items.clear()

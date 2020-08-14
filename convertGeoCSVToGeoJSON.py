@@ -93,25 +93,26 @@ def addListToDict(json_file, key, value):
         pass
 
 
-def addIdentifierAndSlug:
+def addIdentifierAndSlug(row):
     id = row.get('identifier')
     if id is None:
         id = uuid.uuid4()
         slug = baseURL+id
         json_file['dc_identifier_s'] = id
         json_file['layer_slug_s'] = slug
+    else:
+        addToDict(json_file, 'dc_identifier_s', 'identifier')
+        addToDict(json_file, 'layer_slug_s', 'layer_slug')
+    return id
 
 
 with open(filename) as geoMetadata:
     geoMetadata = csv.DictReader(geoMetadata)
     for row in geoMetadata:
         json_file = {}
-        identifier = row['identifier']
-        hierarchy = row['hierarchy']
-        json_file['dc_identifier_s'] = identifier
+        identifier = addIdentifierAndSlug()
         addToDict('dc_rights_s', 'rights')
         addToDict(json_file, 'dc_title_s', 'title')
-        addToDict(json_file, 'layer_slug_s', 'layer_slug')
         fixGeom(json_file, 'solr_geom', 'bounding_box')
         addToDictInt(json_file, 'solr_year_i', 'solr_year')
         addToDict(json_file, 'dct_issued_s', 'date_issued')
@@ -134,7 +135,7 @@ with open(filename) as geoMetadata:
         json_file['dct_provenance_s'] = prov
         json_file['geoblacklight_version'] = '1.0'
         dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
-        c_filename = identifier+'_'+hierarchy+'_'+dt+'.json'
+        c_filename = identifier+'_'+dt+'.json'
         with open(c_filename, 'w') as fp:
             json.dump(json_file, fp)
 

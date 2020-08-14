@@ -47,11 +47,15 @@ def addDictonary(columnName, vocab):
 
 
 # Clean up MARC spreadsheet.
-df['title'] = df['title'].str.rstrip('/')
-df['title'] = df['title'].str.rstrip('.')
+df['title'] = df['title'].str.rstrip('/.')
 df['description'] = df['description'].str.replace('|', ' ')
 df['description'] = df['description'].str.replace('  ', ' ')
-df['description'] = df['bounding_box'].str.replace('|', ',')
+df['description'] = df['description'].str.replace('p. ', 'page ')
+df['description'] = df['description'].str.replace('col. ', 'color ')
+df['description'] = df['description'].str.replace('ill. ', 'illlustration(s) ')
+df['scale'] = df['scale'].str.rstrip(':;,')
+df['scale'] = df['scale'].replace('ca.', 'approximately')
+df['scale'] = df['scale'].replace('in.', 'inch')
 df['description'] = df['title']+'. '+df['description']+' '+df['scale']
 df['rights'] = 'Public'
 df['suppressed'] = 'False'
@@ -84,7 +88,7 @@ if verify == 'yes':
     # Verify headings in dictionary.
     results = vh.verifyHeadingList(updatedList)
     results = pd.DataFrame.from_dict(results)
-    results.to_csv('fullNameResults'+dt+'.csv', encoding='utf-8', index=False)
+    results.to_csv('fullNameResults_'+dt+'.csv', encoding='utf-8', index=False)
 
 # Get validation results from previous generated spreadsheet.
 else:
@@ -108,7 +112,6 @@ verified = pd.DataFrame.pivot(verified, index='oindex',
 verified = verified.rename(columns={'contributors': 'verified_contributors',
                                     'publisher': 'verified_publisher',
                                     'authors': 'verified_authors'})
-verified.to_csv(path_or_buf='testing'+dt+'.csv', encoding='utf-8')
 
 # De-condense headings and organize not_verified headings by original index.
 not_verified.oindex = not_verified.oindex.str.split('|')
@@ -121,10 +124,9 @@ not_verified.reset_index(inplace=True)
 # Sort not_verified headings into contributor, publisher, or author columns.
 not_verified = pd.DataFrame.pivot(not_verified, index='oindex',
                                   columns='field', values='term')
-not_verified = not_verified.rename(columns={'contributors': 'na_contributors',
-                                            'publisher': 'na_publisher',
-                                            'authors': 'na_authors'})
-not_verified.to_csv(path_or_buf='testing2'+dt+'.csv', encoding='utf-8')
+not_verified = not_verified.rename(columns={'contributors': 'nv_contributors',
+                                            'publisher': 'nv_publisher',
+                                            'authors': 'nv_authors'})
 
 # Merge not_verified headings and verified headings into marc spreadsheet.
 verified.reset_index(inplace=True)
@@ -135,7 +137,7 @@ new_df = pd.merge(df, verified, how='left', left_index=True, right_on='oindex')
 new_df = pd.merge(new_df, not_verified, how='left', on='oindex')
 
 # Delete old author, contributor, and publisher columns.
-new_df = new_df.drop(columns=['authors', 'contributors',
+new_df = new_df.drop(columns=['creators', 'authors', 'contributors',
                               'publisher', 'oindex', 'scale'])
 print(new_df.head)
 
