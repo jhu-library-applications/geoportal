@@ -1,5 +1,3 @@
-# geoportal
-
 ## Please see [wiki](https://github.com/mjanowiecki/geoportal/wiki) for more information.
 
 ### combineMetadata.py
