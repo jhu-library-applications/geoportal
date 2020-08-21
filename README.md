@@ -24,7 +24,7 @@ This script uses [pymarc](https://pypi.org/project/pymarc/) to find fields relev
 
 ### verifyHeadings.py
 
-This script `BeautifulSoup` and `rdflib` libraries to read LCNAF and FAST records, and find the authorized name label from an already available URI or from a search based on the name string.
+This script uses `BeautifulSoup` and `rdflib` libraries to read LCNAF and FAST records, and find the authorized name label from an already available URI or from a search based on the name string.
 
 ### MARC-related dictionaries
 
