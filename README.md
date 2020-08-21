@@ -26,16 +26,17 @@ This script uses [pymarc](https://pypi.org/project/pymarc/) to find fields relev
 
 This script `BeautifulSoup` and `rdflib` libraries to read LCNAF and FAST records, and find the authorized name label from an already available URI or from a search based on the name string.
 
-### dictionaries
+### MARC-related dictionaries
+
 |File                   | Information                                                             |
 |:-----------------------|:-------------------------------------------------------------------------|
 |gacs_code.csv          | List of codes and place names from MARC Code List for Geographic Areas.
 |iso_19115topics.csv    | List of ISO 19115 topics and their URIs.                                
 |iso_lang.csv           | List of ISO language codes from ISO 639-1 or ISO 639-2 and the name of the language in English. The shortest of the ISO codes available for that language was chosen.
 |lcgft_cartographic.csv | List of Library of Congress Genre/Form Terms found under the term "Cartographic materials." Each term is matched with its URI.
-|marc_007categoryMaterial.csv| List of record type names and their codes used in the 007 field of MARC record.
+|marc_007categoryMaterial.csv| List of record type names and their codes used in the 007 field.
 |marc_catsourceAuthorities.csv| List of cataloging source names and their codes used in the 008 field.
-|marc_datetypes.csv     | List of date type names and their codes used in the DtSt field of MARC records.
+|marc_datetypes.csv     | List of date type names and their codes used in the DtSt field.
 |marc_lang.csv          | List of language names and their codes from the MARC Code List for Languages.
 |marc_levelAuthorities.csv| List of authority level names and their codes used in the 008 field for authority records.
 |marc_typeAuthorities.csv| List of kind of record names and their codes used in the 008 field for authority records.
