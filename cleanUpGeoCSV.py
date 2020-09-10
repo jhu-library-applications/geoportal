@@ -50,12 +50,12 @@ def addDictonary(columnName, vocab):
 df['title'] = df['title'].str.rstrip('/.')
 df['description'] = df['description'].str.replace('|', ' ')
 df['description'] = df['description'].str.replace('  ', ' ')
-df['description'] = df['description'].str.replace('p. ', 'page ')
-df['description'] = df['description'].str.replace('col. ', 'color ')
-df['description'] = df['description'].str.replace('ill. ', 'illlustration(s) ')
+df['description'] = df['description'].str.replace(' p. ', ' page ')
+df['description'] = df['description'].str.replace(' col. ', ' color ')
+df['description'] = df['description'].str.replace(' ill. ', ' illlustration(s) ')
 df['scale'] = df['scale'].str.rstrip(':;,')
-df['scale'] = df['scale'].replace('ca.', 'approximately')
-df['scale'] = df['scale'].replace('in.', 'inch')
+df['scale'] = df['scale'].replace(' ca.', ' approximately')
+df['scale'] = df['scale'].replace(' in.', ' inch')
 df['description'] = df['title']+'. '+df['description']+' '+df['scale']
 df['rights'] = 'Public'
 df['suppressed'] = 'False'

@@ -8,7 +8,6 @@ import uuid
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file')
 parser.add_argument('-p', '--prov')
-parser.add_argument('-b', '--baseURL')
 args = parser.parse_args()
 
 if args.file:
@@ -19,10 +18,6 @@ if args.prov:
     prov = args.prov
 else:
     prov = input('Enter provenance information: ')
-if args.baseURL:
-    baseURL = args.baseURL
-else:
-    baseURL = input('Enter the baseURL of your GeoBlacklight instance: ')
 
 
 def fixGeom(json_file, key, value):
@@ -97,9 +92,8 @@ def addIdentifierAndSlug(row):
     id = row.get('identifier')
     if id is None:
         id = uuid.uuid4()
-        slug = baseURL+id
         json_file['dc_identifier_s'] = id
-        json_file['layer_slug_s'] = slug
+        json_file['layer_slug_s'] = id
     else:
         addToDict(json_file, 'dc_identifier_s', 'identifier')
         addToDict(json_file, 'layer_slug_s', 'layer_slug')
