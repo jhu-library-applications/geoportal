@@ -74,3 +74,4 @@ fixcsv.py
 !marc_levelAuthorities.csv
 !marc_typeAuthorities.csv
 !marc_catsourceAuthorities.csv
+!marc_007categoryMaterial.csv
