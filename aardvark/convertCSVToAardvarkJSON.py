@@ -266,9 +266,8 @@ for index, row in geoMetadata.iterrows():
         item_log['id'] = id
         item_log['aardvark_valid'] = True
         # Create datetime stamp for filenaming.
-        dt = datetime.now().strftime('%Y-%m-%d %H.%M.%S')
         # Create JSON file.
-        c_filename = id+'_'+dt+'.json'
+        c_filename = id+'.json'
         full_path = directory+'/'+c_filename
         with open(full_path, 'w') as fp:
             json.dump(json_file, fp)
