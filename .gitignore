@@ -73,5 +73,7 @@ fixcsv.py
 !lcgft_cartographic.csv
 !marc_levelAuthorities.csv
 !marc_typeAuthorities.csv
+!aardvark_controlled.csv
+!schema-aardvark.json
 !marc_catsourceAuthorities.csv
 !marc_007categoryMaterial.csv
