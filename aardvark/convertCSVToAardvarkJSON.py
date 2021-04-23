@@ -54,7 +54,7 @@ def addGeomToDict(key, columnName):
     value = row.get(columnName)
     if pd.notna(value):
         value = value.split(',')
-        # Converts (West, South, East, North) --> (West, East, North, South)
+        # Converts West, South, East, North --> (West, East, North, South)
         if len(value) == 4:
             west = value[0]
             south = value[1]

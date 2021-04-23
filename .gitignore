@@ -77,3 +77,4 @@ fixcsv.py
 !schema-aardvark.json
 !marc_catsourceAuthorities.csv
 !marc_007categoryMaterial.csv
+!example.xlsx
